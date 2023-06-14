@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { tarotDeck, images } from './tarotDeck';
+import Card from './components/Card';
 
 const App = () => {
   const [drawnCards, setDrawnCards] = useState([]);
@@ -51,11 +52,11 @@ const App = () => {
     // // Display the reading to the user
     // alert(fullReading);
 
-    return {theme, arrangement}
+    return { theme, arrangement }
   };
 
   const AIReading = async () => {
-    const {theme, arrangement} = reading()
+    const { theme, arrangement } = reading()
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       // mode: "cors", // no-cors, *cors, same-origin
@@ -76,7 +77,7 @@ const App = () => {
         "messages": [
           { "role": "system", "content": `Give a tarot reading.` },
           { "role": "user", "content": `Using this array of tarot cards ${arrangement} and the following theme: ${theme}, interpret them considering this question: ${question.length ? question : 'can you give me a general reading'}?.` }
-      ]
+        ]
         // "messages": [
         //     { "role": "system", "content": `Suggest a beer.` },
         //     { "role": "user", "content": `Please recommend some beers and their respective flavor profiles based on the following description/profile/question: ${question.length ? question : 'can you suggest a popular craft beer and what its flavor profile is'}?.` }
@@ -96,10 +97,9 @@ const App = () => {
       <h1>Ask the cards a question</h1>
       <input onChange={(e) => setQuestion(e.target.value)}></input>
       {drawnCards.length > 0 && (
-        <div>
+        <div className='flex flex-row flex-wrap justify-center bg-red-500 my-5 deck'>
           {drawnCards.map((card, index) => (
-            // <img key={index} src={'/Users/justin/Documents/Tarot/v2/tarot-reading-app-2/public/images/1909_PAM_A/the_fool.jpg'} alt={card.name} className={card.reversed ? 'reversed' : ''} />
-            <img key={index} src={images[card.name.split(' ').map((string) => string.charAt(0).toUpperCase() + string.slice(1)).join('')]} alt={card.name} className={card.reversed ? 'reversed' : ''} />
+            <Card card={card} index={index} />
           ))}
         </div>
       )}
