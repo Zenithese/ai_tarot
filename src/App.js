@@ -67,7 +67,7 @@ const App = () => {
       // credentials: "same-origin", // include, *same-origin, omit
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer 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"
+        "Authorization": "Bearer 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"
       },
       // redirect: "follow", // manual, *follow, error
       // referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
