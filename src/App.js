@@ -108,10 +108,15 @@ const App = () => {
     }
   })
 
+  const handleNewReading = () => {
+    setTarotReading('')
+    clearDrawnCards()
+  }
+
   return (
     <div className="App">
       <h1>Tarot Card Reader</h1>
-      <button className='border-2 border-black p-2 m-2' onClick={drawCard}>Draw a card</button>
+      <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCard} disabled={drawnCards.length >= 5}>Draw a card</button>
       <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
       <h1>Ask the cards a question</h1>
       <input className='m-2' onChange={(e) => setQuestion(e.target.value)}></input>
@@ -128,6 +133,7 @@ const App = () => {
           <div className='bg-black opacity-75 absolute w-[95%] m-auto h-[100vh] overflow-scroll text-white top-0 left-0 right-0 bottom-0 flex flex-col'>
             <div className='flex m-auto flex-col'>
               {formatTarotReading}
+              <button className='border-2 border-white p-2 m-2' onClick={() => handleNewReading()}>New Reading</button>
             </div>
           </div>
           :

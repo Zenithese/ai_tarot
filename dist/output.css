@@ -667,6 +667,11 @@ video {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
+
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -851,4 +856,16 @@ video {
 .reversed {
   -webkit-transform: rotateX(180deg);
   transform: rotateX(180deg);
+}
+
+.disabled\:opacity-75:disabled {
+  opacity: 0.75;
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
+}
+
+.disabled\:opacity-40:disabled {
+  opacity: 0.4;
 }
