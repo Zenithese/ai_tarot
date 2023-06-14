@@ -7,6 +7,8 @@ const App = () => {
   const [drawnCards, setDrawnCards] = useState([]);
   const [deck, setDeck] = useState(tarotDeck);
   const [question, setQuestion] = useState('')
+  const [tarotReading, setTarotReading] = useState('')
+  const [theme, setTheme] = useState('')
 
   const drawCard = () => {
     const randomIndex = Math.floor(Math.random() * deck.length);
@@ -52,6 +54,7 @@ const App = () => {
     // // Display the reading to the user
     // alert(fullReading);
 
+    setTheme(theme)
     return { theme, arrangement }
   };
 
@@ -86,24 +89,50 @@ const App = () => {
     });
     const jsonData = await response.json();
     console.log(jsonData)
-    alert(jsonData.choices[0].message.content)
+    setTarotReading(jsonData.choices[0].message.content)
   }
+
+  const formatTarotReading = tarotReading.split("\n\n").map((p, i) => {
+    if (i == 0) {
+      return (
+        <>
+          <p className='indent-8 text-left leading-loose w-[90%] my-3 mx-auto'>{`${theme}:`}</p>
+        </>
+      )
+    } else {
+      return (
+        <>
+          <p className='indent-8 text-left leading-loose w-[90%] my-3 mx-auto'>{p}</p>
+        </>
+      )
+    }
+  })
 
   return (
     <div className="App">
       <h1>Tarot Card Reader</h1>
-      <button onClick={drawCard}>Draw a card</button>
-      <button onClick={clearDrawnCards}>Clear cards</button>
+      <button className='border-2 border-black p-2 m-2' onClick={drawCard}>Draw a card</button>
+      <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
       <h1>Ask the cards a question</h1>
-      <input onChange={(e) => setQuestion(e.target.value)}></input>
+      <input className='m-2' onChange={(e) => setQuestion(e.target.value)}></input>
       {drawnCards.length > 0 && (
-        <div className='flex flex-row flex-wrap justify-center bg-red-500 my-5 deck'>
+        <div className='flex flex-row flex-wrap justify-center my-5 deck'>
           {drawnCards.map((card, index) => (
             <Card card={card} index={index} />
           ))}
         </div>
       )}
-      {drawnCards.length > 1 && <button onClick={AIReading}>Get Reading</button>}
+      {drawnCards.length > 1 && <button className='border-2 border-black p-2 m-2' onClick={AIReading}>Get Reading</button>}
+      {
+        tarotReading.length ?
+          <div className='bg-black opacity-75 absolute w-[95%] m-auto h-[100vh] overflow-scroll text-white top-0 left-0 right-0 bottom-0 flex flex-col'>
+            <div className='flex m-auto flex-col'>
+              {formatTarotReading}
+            </div>
+          </div>
+          :
+          null
+      }
     </div>
   );
 };

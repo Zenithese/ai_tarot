@@ -106,3 +106,8 @@
 .tarot-img {
   border-radius: 10px;
 }
+
+.reversed {
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
