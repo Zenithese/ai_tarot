@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { tarotDeck, images } from './tarotDeck';
+import { tarotDeck } from './tarotDeck';
 import Card from './components/Card';
 
 const App = () => {
@@ -60,6 +60,7 @@ const App = () => {
 
   const AIReading = async () => {
     const { theme, arrangement } = reading()
+    console.log(`Bearer ${process.env.REACT_APP_CHATGPTKEY}`)
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       // mode: "cors", // no-cors, *cors, same-origin
@@ -67,7 +68,7 @@ const App = () => {
       // credentials: "same-origin", // include, *same-origin, omit
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer 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"
+        "Authorization": `Bearer ${process.env.REACT_APP_CHATGPTKEY}`
       },
       // redirect: "follow", // manual, *follow, error
       // referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
@@ -93,16 +94,16 @@ const App = () => {
   }
 
   const formatTarotReading = tarotReading.split("\n\n").map((p, i) => {
-    if (i == 0) {
+    if (i === 0) {
       return (
         <>
-          <p className='indent-8 text-left leading-loose w-[90%] my-3 mx-auto'>{`${theme}:`}</p>
+          <p key={0} className='indent-8 text-left leading-loose w-[90%] my-3 mx-auto'>{`${theme}:`}</p>
         </>
       )
     } else {
       return (
         <>
-          <p className='indent-8 text-left leading-loose w-[90%] my-3 mx-auto'>{p}</p>
+          <p index={i} className='indent-8 text-left leading-loose w-[90%] my-3 mx-auto'>{p}</p>
         </>
       )
     }
@@ -122,8 +123,8 @@ const App = () => {
       <input className='m-2' onChange={(e) => setQuestion(e.target.value)}></input>
       {drawnCards.length > 0 && (
         <div className='flex flex-row flex-wrap justify-center my-5 deck'>
-          {drawnCards.map((card, index) => (
-            <Card card={card} index={index} />
+          {drawnCards.map((card) => (
+            <Card card={card} />
           ))}
         </div>
       )}

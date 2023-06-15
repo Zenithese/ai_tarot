@@ -1,4 +1,90 @@
 import './App.css';
+import React from 'react';
+
+import TheFool from './images/1909_PAM_A/the_fool.jpg';
+import TheMagician from './images/1909_PAM_A/the_magician.jpg';
+import TheHighPriestess from './images/1909_PAM_A/the_high_priestess.jpg';
+import TheEmpress from './images/1909_PAM_A/the_empress.jpg';
+import TheEmperor from './images/1909_PAM_A/the_emperor.jpg';
+import TheHierophant from './images/1909_PAM_A/the_hierophant.jpg';
+import TheLovers from './images/1909_PAM_A/the_lovers.jpg';
+import TheChariot from './images/1909_PAM_A/the_chariot.jpg';
+import Strength from './images/1909_PAM_A/strength.jpg';
+import TheHermit from './images/1909_PAM_A/the_hermit.jpg';
+import WheelOfFortune from './images/1909_PAM_A/wheel_of_fortune.jpg';
+import Justice from './images/1909_PAM_A/justice.jpg';
+import TheHangedMan from './images/1909_PAM_A/the_hanged_man.jpg';
+import Death from './images/1909_PAM_A/death.jpg';
+import Temperance from './images/1909_PAM_A/temperance.jpg';
+import TheDevil from './images/1909_PAM_A/the_devil.jpg';
+import TheTower from './images/1909_PAM_A/the_tower.jpg';
+import TheStar from './images/1909_PAM_A/the_star.jpg';
+import TheMoon from './images/1909_PAM_A/the_moon.jpg';
+import TheSun from './images/1909_PAM_A/the_sun.jpg';
+import Judgment from './images/1909_PAM_A/judgment.jpg';
+import TheWorld from './images/1909_PAM_A/the_world.jpg';
+
+import AceOfWands from './images/1909_PAM_A/ace_of_wands.jpg';
+import TwoOfWands from './images/1909_PAM_A/two_of_wands.jpg';
+import ThreeOfWands from './images/1909_PAM_A/three_of_wands.jpg';
+import FourOfWands from './images/1909_PAM_A/four_of_wands.jpg';
+import FiveOfWands from './images/1909_PAM_A/five_of_wands.jpg';
+import SixOfWands from './images/1909_PAM_A/six_of_wands.jpg';
+import SevenOfWands from './images/1909_PAM_A/seven_of_wands.jpg';
+import EightOfWands from './images/1909_PAM_A/eight_of_wands.jpg';
+import NineOfWands from './images/1909_PAM_A/nine_of_wands.jpg';
+import TenOfWands from './images/1909_PAM_A/ten_of_wands.jpg';
+import PageOfWands from './images/1909_PAM_A/page_of_wands.jpg';
+import KnightOfWands from './images/1909_PAM_A/knight_of_wands.jpg';
+import QueenOfWands from './images/1909_PAM_A/queen_of_wands.jpg';
+import KingOfWands from './images/1909_PAM_A/king_of_wands.jpg';
+
+import AceOfCups from './images/1909_PAM_A/ace_of_cups.jpg';
+import TwoOfCups from './images/1909_PAM_A/two_of_cups.jpg';
+import ThreeOfCups from './images/1909_PAM_A/three_of_cups.jpg';
+import FourOfCups from './images/1909_PAM_A/four_of_cups.jpg';
+import FiveOfCups from './images/1909_PAM_A/five_of_cups.jpg';
+import SixOfCups from './images/1909_PAM_A/six_of_cups.jpg';
+import SevenOfCups from './images/1909_PAM_A/seven_of_cups.jpg';
+import EightOfCups from './images/1909_PAM_A/eight_of_cups.jpg';
+import NineOfCups from './images/1909_PAM_A/nine_of_cups.jpg';
+import TenOfCups from './images/1909_PAM_A/ten_of_cups.jpg';
+import PageOfCups from './images/1909_PAM_A/page_of_cups.jpg';
+import KnightOfCups from './images/1909_PAM_A/knight_of_cups.jpg';
+import QueenOfCups from './images/1909_PAM_A/queen_of_cups.jpg';
+import KingOfCups from './images/1909_PAM_A/king_of_cups.jpg';
+
+import AceOfSwords from './images/1909_PAM_A/ace_of_swords.jpg';
+import TwoOfSwords from './images/1909_PAM_A/two_of_swords.jpg';
+import ThreeOfSwords from './images/1909_PAM_A/three_of_swords.jpg';
+import FourOfSwords from './images/1909_PAM_A/four_of_swords.jpg';
+import FiveOfSwords from './images/1909_PAM_A/five_of_swords.jpg';
+import SixOfSwords from './images/1909_PAM_A/six_of_swords.jpg';
+import SevenOfSwords from './images/1909_PAM_A/seven_of_swords.jpg';
+import EightOfSwords from './images/1909_PAM_A/eight_of_swords.jpg';
+import NineOfSwords from './images/1909_PAM_A/nine_of_swords.jpg';
+import TenOfSwords from './images/1909_PAM_A/ten_of_swords.jpg';
+import PageOfSwords from './images/1909_PAM_A/page_of_swords.jpg';
+import KnightOfSwords from './images/1909_PAM_A/knight_of_swords.jpg';
+import QueenOfSwords from './images/1909_PAM_A/queen_of_swords.jpg';
+import KingOfSwords from './images/1909_PAM_A/king_of_swords.jpg';
+
+import AceOfPentacles from './images/1909_PAM_A/ace_of_pentacles.jpg';
+import TwoOfPentacles from './images/1909_PAM_A/two_of_pentacles.jpg';
+import ThreeOfPentacles from './images/1909_PAM_A/three_of_pentacles.jpg';
+import FourOfPentacles from './images/1909_PAM_A/four_of_pentacles.jpg';
+import FiveOfPentacles from './images/1909_PAM_A/five_of_pentacles.jpg';
+import SixOfPentacles from './images/1909_PAM_A/six_of_pentacles.jpg';
+import SevenOfPentacles from './images/1909_PAM_A/seven_of_pentacles.jpg';
+import EightOfPentacles from './images/1909_PAM_A/eight_of_pentacles.jpg';
+import NineOfPentacles from './images/1909_PAM_A/nine_of_pentacles.jpg';
+import TenOfPentacles from './images/1909_PAM_A/ten_of_pentacles.jpg';
+import PageOfPentacles from './images/1909_PAM_A/page_of_pentacles.jpg';
+import KnightOfPentacles from './images/1909_PAM_A/knight_of_pentacles.jpg';
+import QueenOfPentacles from './images/1909_PAM_A/queen_of_pentacles.jpg';
+import KingOfPentacles from './images/1909_PAM_A/king_of_pentacles.jpg';
+
+import Back from './images/1909_PAM_A/back.jpg'
 
 export const tarotDeck = [
     {
@@ -710,90 +796,175 @@ export const tarotDeck = [
 ];
 
 export const images = {
-    TheFool: '/images/1909_PAM_A/the_fool.jpg',
-    TheMagician: '/images/1909_PAM_A/the_magician.jpg',
-    TheHighPriestess: '/images/1909_PAM_A/the_high_priestess.jpg',
-    TheEmpress: '/images/1909_PAM_A/the_empress.jpg',
-    TheEmperor: '/images/1909_PAM_A/the_emperor.jpg',
-    TheHierophant: '/images/1909_PAM_A/the_hierophant.jpg',
-    TheLovers: '/images/1909_PAM_A/the_lovers.jpg',
-    TheChariot: '/images/1909_PAM_A/the_chariot.jpg',
-    Strength: '/images/1909_PAM_A/strength.jpg',
-    TheHermit: '/images/1909_PAM_A/the_hermit.jpg',
-    WheelOfFortune: '/images/1909_PAM_A/wheel_of_fortune.jpg',
-    Justice: '/images/1909_PAM_A/justice.jpg',
-    TheHangedMan: '/images/1909_PAM_A/the_hanged_man.jpg',
-    Death: '/images/1909_PAM_A/death.jpg',
-    Temperance: '/images/1909_PAM_A/temperance.jpg',
-    TheDevil: '/images/1909_PAM_A/the_devil.jpg',
-    TheTower: '/images/1909_PAM_A/the_tower.jpg',
-    TheStar: '/images/1909_PAM_A/the_star.jpg',
-    TheMoon: '/images/1909_PAM_A/the_moon.jpg',
-    TheSun: '/images/1909_PAM_A/the_sun.jpg',
-    Judgment: '/images/1909_PAM_A/judgment.jpg',
-    TheWorld: '/images/1909_PAM_A/the_world.jpg',
+    TheFool: <img key={0} src={TheFool} alt="The Fool" />,
+    TheMagician: <img key={1} src={TheMagician} alt="The Magician" />,
+    TheHighPriestess: <img key={2} src={TheHighPriestess} alt="The High Priestess" />,
+    TheEmpress: <img key={3} src={TheEmpress} alt="The Empress" />,
+    TheEmperor: <img key={4} src={TheEmperor} alt="The Emperor" />,
+    TheHierophant: <img key={5} src={TheHierophant} alt="The Hierophant" />,
+    TheLovers: <img key={6} src={TheLovers} alt="The Lovers" />,
+    TheChariot: <img key={7} src={TheChariot} alt="The Chariot" />,
+    Strength: <img key={8} src={Strength} alt="Strength" />,
+    TheHermit: <img key={9} src={TheHermit} alt="The Hermit" />,
+    WheelOfFortune: <img key={10} src={WheelOfFortune} alt="Wheel Of Fortune" />,
+    Justice: <img key={11} src={Justice} alt="Justice" />,
+    TheHangedMan: <img key={12} src={TheHangedMan} alt="The Hanged Man" />,
+    Death: <img key={13} src={Death} alt="Death" />,
+    Temperance: <img key={14} src={Temperance} alt="Temperance" />,
+    TheDevil: <img key={15} src={TheDevil} alt="The Devil" />,
+    TheTower: <img key={16} src={TheTower} alt="The Tower" />,
+    TheStar: <img key={17} src={TheStar} alt="The Star" />,
+    TheMoon: <img key={18} src={TheMoon} alt="The Moon" />,
+    TheSun: <img key={19} src={TheSun} alt="The Sun" />,
+    Judgment: <img key={20} src={Judgment} alt="Judgment" />,
+    TheWorld: <img key={21} src={TheWorld} alt="The World" />,
 
-    AceOfWands: '/images/1909_PAM_A/ace_of_wands.jpg',
-    TwoOfWands: '/images/1909_PAM_A/two_of_wands.jpg',
-    ThreeOfWands: '/images/1909_PAM_A/three_of_wands.jpg',
-    FourOfWands: '/images/1909_PAM_A/four_of_wands.jpg',
-    FiveOfWands: '/images/1909_PAM_A/five_of_wands.jpg',
-    SixOfWands: '/images/1909_PAM_A/six_of_wands.jpg',
-    SevenOfWands: '/images/1909_PAM_A/seven_of_wands.jpg',
-    EightOfWands: '/images/1909_PAM_A/eight_of_wands.jpg',
-    NineOfWands: '/images/1909_PAM_A/nine_of_wands.jpg',
-    TenOfWands: '/images/1909_PAM_A/ten_of_wands.jpg',
-    PageOfWands: '/images/1909_PAM_A/page_of_wands.jpg',
-    KnightOfWands: '/images/1909_PAM_A/knight_of_wands.jpg',
-    QueenOfWands: '/images/1909_PAM_A/queen_of_wands.jpg',
-    KingOfWands: '/images/1909_PAM_A/king_of_wands.jpg',
+    AceOfWands: <img key={22} src={AceOfWands} alt="Ace Of Wands" />,
+    TwoOfWands: <img key={23} src={TwoOfWands} alt="Two Of Wands" />,
+    ThreeOfWands: <img key={24} src={ThreeOfWands} alt="Three Of Wands" />,
+    FourOfWands: <img key={25} src={FourOfWands} alt="Four Of Wands" />,
+    FiveOfWands: <img key={26} src={FiveOfWands} alt="Five Of Wands" />,
+    SixOfWands: <img key={27} src={SixOfWands} alt="Six Of Wands" />,
+    SevenOfWands: <img key={28} src={SevenOfWands} alt="Seven Of Wands" />,
+    EightOfWands: <img key={29} src={EightOfWands} alt="Eight Of Wands" />,
+    NineOfWands: <img key={30} src={NineOfWands} alt="Nine Of Wands" />,
+    TenOfWands: <img key={31} src={TenOfWands} alt="Ten Of Wands" />,
+    PageOfWands: <img key={32} src={PageOfWands} alt="Page Of Wands" />,
+    KnightOfWands: <img key={33} src={KnightOfWands} alt="Knight Of Wands" />,
+    QueenOfWands: <img key={34} src={QueenOfWands} alt="Queen Of Wands" />,
+    KingOfWands: <img key={35} src={KingOfWands} alt="King Of Wands" />,
 
-    AceOfCups: '/images/1909_PAM_A/ace_of_cups.jpg',
-    TwoOfCups: '/images/1909_PAM_A/two_of_cups.jpg',
-    ThreeOfCups: '/images/1909_PAM_A/three_of_cups.jpg',
-    FourOfCups: '/images/1909_PAM_A/four_of_cups.jpg',
-    FiveOfCups: '/images/1909_PAM_A/five_of_cups.jpg',
-    SixOfCups: '/images/1909_PAM_A/six_of_cups.jpg',
-    SevenOfCups: '/images/1909_PAM_A/seven_of_cups.jpg',
-    EightOfCups: '/images/1909_PAM_A/eight_of_cups.jpg',
-    NineOfCups: '/images/1909_PAM_A/nine_of_cups.jpg',
-    TenOfCups: '/images/1909_PAM_A/ten_of_cups.jpg',
-    PageOfCups: '/images/1909_PAM_A/page_of_cups.jpg',
-    KnightOfCups: '/images/1909_PAM_A/knight_of_cups.jpg',
-    QueenOfCups: '/images/1909_PAM_A/queen_of_cups.jpg',
-    KingOfCups: '/images/1909_PAM_A/king_of_cups.jpg',
+    AceOfCups: <img key={36} src={AceOfCups} alt="Ace Of Cups" />,
+    TwoOfCups: <img key={37} src={TwoOfCups} alt="Two Of Cups" />,
+    ThreeOfCups: <img key={38} src={ThreeOfCups} alt="Three Of Cups" />,
+    FourOfCups: <img key={39} src={FourOfCups} alt="Four Of Cups" />,
+    FiveOfCups: <img key={40} src={FiveOfCups} alt="Five Of Cups" />,
+    SixOfCups: <img key={41} src={SixOfCups} alt="Six Of Cups" />,
+    SevenOfCups: <img key={42} src={SevenOfCups} alt="Seven Of Cups" />,
+    EightOfCups: <img key={43} src={EightOfCups} alt="Eight Of Cups" />,
+    NineOfCups: <img key={44} src={NineOfCups} alt="Nine Of Cups" />,
+    TenOfCups: <img key={45} src={TenOfCups} alt="Ten Of Cups" />,
+    PageOfCups: <img key={46} src={PageOfCups} alt="Page Of Cups" />,
+    KnightOfCups: <img key={47} src={KnightOfCups} alt="Knight Of Cups" />,
+    QueenOfCups: <img key={48} src={QueenOfCups} alt="Queen Of Cups" />,
+    KingOfCups: <img key={49} src={KingOfCups} alt="King Of Cups" />,
 
-    AceOfSwords: '/images/1909_PAM_A/ace_of_swords.jpg',
-    TwoOfSwords: '/images/1909_PAM_A/two_of_swords.jpg',
-    ThreeOfSwords: '/images/1909_PAM_A/three_of_swords.jpg',
-    FourOfSwords: '/images/1909_PAM_A/four_of_swords.jpg',
-    FiveOfSwords: '/images/1909_PAM_A/five_of_swords.jpg',
-    SixOfSwords: '/images/1909_PAM_A/six_of_swords.jpg',
-    SevenOfSwords: '/images/1909_PAM_A/seven_of_swords.jpg',
-    EightOfSwords: '/images/1909_PAM_A/eight_of_swords.jpg',
-    NineOfSwords: '/images/1909_PAM_A/nine_of_swords.jpg',
-    TenOfSwords: '/images/1909_PAM_A/ten_of_swords.jpg',
-    PageOfSwords: '/images/1909_PAM_A/page_of_swords.jpg',
-    KnightOfSwords: '/images/1909_PAM_A/knight_of_swords.jpg',
-    QueenOfSwords: '/images/1909_PAM_A/queen_of_swords.jpg',
-    KingOfSwords: '/images/1909_PAM_A/king_of_swords.jpg',
+    AceOfSwords: <img key={50} src={AceOfSwords} alt="Ace Of Swords" />,
+    TwoOfSwords: <img key={51} src={TwoOfSwords} alt="Two Of Swords" />,
+    ThreeOfSwords: <img key={52} src={ThreeOfSwords} alt="Three Of Swords" />,
+    FourOfSwords: <img key={53} src={FourOfSwords} alt="Four Of Swords" />,
+    FiveOfSwords: <img key={54} src={FiveOfSwords} alt="Five Of Swords" />,
+    SixOfSwords: <img key={55} src={SixOfSwords} alt="Six Of Swords" />,
+    SevenOfSwords: <img key={56} src={SevenOfSwords} alt="Seven Of Swords" />,
+    EightOfSwords: <img key={57} src={EightOfSwords} alt="Eight Of Swords" />,
+    NineOfSwords: <img key={58} src={NineOfSwords} alt="Nine Of Swords" />,
+    TenOfSwords: <img key={59} src={TenOfSwords} alt="Ten Of Swords" />,
+    PageOfSwords: <img key={60} src={PageOfSwords} alt="Page Of Swords" />,
+    KnightOfSwords: <img key={61} src={KnightOfSwords} alt="Knight Of Swords" />,
+    QueenOfSwords: <img key={62} src={QueenOfSwords} alt="Queen Of Swords" />,
+    KingOfSwords: <img key={63} src={KingOfSwords} alt="King Of Swords" />,
 
-    AceOfPentacles: '/images/1909_PAM_A/ace_of_pentacles.jpg',
-    TwoOfPentacles: '/images/1909_PAM_A/two_of_pentacles.jpg',
-    ThreeOfPentacles: '/images/1909_PAM_A/three_of_pentacles.jpg',
-    FourOfPentacles: '/images/1909_PAM_A/four_of_pentacles.jpg',
-    FiveOfPentacles: '/images/1909_PAM_A/five_of_pentacles.jpg',
-    SixOfPentacles: '/images/1909_PAM_A/six_of_pentacles.jpg',
-    SevenOfPentacles: '/images/1909_PAM_A/seven_of_pentacles.jpg',
-    EightOfPentacles: '/images/1909_PAM_A/eight_of_pentacles.jpg',
-    NineOfPentacles: '/images/1909_PAM_A/nine_of_pentacles.jpg',
-    TenOfPentacles: '/images/1909_PAM_A/ten_of_pentacles.jpg',
-    PageOfPentacles: '/images/1909_PAM_A/page_of_pentacles.jpg',
-    KnightOfPentacles: '/images/1909_PAM_A/knight_of_pentacles.jpg',
-    QueenOfPentacles: '/images/1909_PAM_A/queen_of_pentacles.jpg',
-    KingOfPentacles: '/images/1909_PAM_A/king_of_pentacles.jpg',
+    AceOfPentacles: <img key={64} src={AceOfPentacles} alt="Ace Of Pentacles" />,
+    TwoOfPentacles: <img key={65} src={TwoOfPentacles} alt="Two Of Pentacles" />,
+    ThreeOfPentacles: <img key={66} src={ThreeOfPentacles} alt="Three Of Pentacles" />,
+    FourOfPentacles: <img key={67} src={FourOfPentacles} alt="Four Of Pentacles" />,
+    FiveOfPentacles: <img key={68} src={FiveOfPentacles} alt="Five Of Pentacles" />,
+    SixOfPentacles: <img key={69} src={SixOfPentacles} alt="Six Of Pentacles" />,
+    SevenOfPentacles: <img key={70} src={SevenOfPentacles} alt="Seven Of Pentacles" />,
+    EightOfPentacles: <img key={71} src={EightOfPentacles} alt="Eight Of Pentacles" />,
+    NineOfPentacles: <img key={72} src={NineOfPentacles} alt="Nine Of Pentacles" />,
+    TenOfPentacles: <img key={73} src={TenOfPentacles} alt="Ten Of Pentacles" />,
+    PageOfPentacles: <img key={74} src={PageOfPentacles} alt="Page Of Pentacles" />,
+    KnightOfPentacles: <img key={75} src={KnightOfPentacles} alt="Knight Of Pentacles" />,
+    QueenOfPentacles: <img key={76} src={QueenOfPentacles} alt="Queen Of Pentacles" />,
+    KingOfPentacles: <img key={77} src={KingOfPentacles} alt="King Of Pentacles" />,
+
+    Back: <img key={77} src={Back} alt="back of" className='tarot-img'/>
 };
 
+export const reversedImages = {
+    TheFool: <img key={0} src={TheFool} alt="The Fool"  className='reversed'/>,
+    TheMagician: <img key={1} src={TheMagician} alt="The Magician"  className='reversed'/>,
+    TheHighPriestess: <img key={2} src={TheHighPriestess} alt="The High Priestess"  className='reversed'/>,
+    TheEmpress: <img key={3} src={TheEmpress} alt="The Empress"  className='reversed'/>,
+    TheEmperor: <img key={4} src={TheEmperor} alt="The Emperor"  className='reversed'/>,
+    TheHierophant: <img key={5} src={TheHierophant} alt="The Hierophant"  className='reversed'/>,
+    TheLovers: <img key={6} src={TheLovers} alt="The Lovers"  className='reversed'/>,
+    TheChariot: <img key={7} src={TheChariot} alt="The Chariot"  className='reversed'/>,
+    Strength: <img key={8} src={Strength} alt="Strength"  className='reversed'/>,
+    TheHermit: <img key={9} src={TheHermit} alt="The Hermit"  className='reversed'/>,
+    WheelOfFortune: <img key={10} src={WheelOfFortune} alt="Wheel Of Fortune"  className='reversed'/>,
+    Justice: <img key={11} src={Justice} alt="Justice"  className='reversed'/>,
+    TheHangedMan: <img key={12} src={TheHangedMan} alt="The Hanged Man"  className='reversed'/>,
+    Death: <img key={13} src={Death} alt="Death"  className='reversed'/>,
+    Temperance: <img key={14} src={Temperance} alt="Temperance"  className='reversed'/>,
+    TheDevil: <img key={15} src={TheDevil} alt="The Devil"  className='reversed'/>,
+    TheTower: <img key={16} src={TheTower} alt="The Tower"  className='reversed'/>,
+    TheStar: <img key={17} src={TheStar} alt="The Star"  className='reversed'/>,
+    TheMoon: <img key={18} src={TheMoon} alt="The Moon"  className='reversed'/>,
+    TheSun: <img key={19} src={TheSun} alt="The Sun"  className='reversed'/>,
+    Judgment: <img key={20} src={Judgment} alt="Judgment"  className='reversed'/>,
+    TheWorld: <img key={21} src={TheWorld} alt="The World"  className='reversed'/>,
 
+    AceOfWands: <img key={22} src={AceOfWands} alt="Ace Of Wands"  className='reversed'/>,
+    TwoOfWands: <img key={23} src={TwoOfWands} alt="Two Of Wands"  className='reversed'/>,
+    ThreeOfWands: <img key={24} src={ThreeOfWands} alt="Three Of Wands"  className='reversed'/>,
+    FourOfWands: <img key={25} src={FourOfWands} alt="Four Of Wands"  className='reversed'/>,
+    FiveOfWands: <img key={26} src={FiveOfWands} alt="Five Of Wands"  className='reversed'/>,
+    SixOfWands: <img key={27} src={SixOfWands} alt="Six Of Wands"  className='reversed'/>,
+    SevenOfWands: <img key={28} src={SevenOfWands} alt="Seven Of Wands"  className='reversed'/>,
+    EightOfWands: <img key={29} src={EightOfWands} alt="Eight Of Wands"  className='reversed'/>,
+    NineOfWands: <img key={30} src={NineOfWands} alt="Nine Of Wands"  className='reversed'/>,
+    TenOfWands: <img key={31} src={TenOfWands} alt="Ten Of Wands"  className='reversed'/>,
+    PageOfWands: <img key={32} src={PageOfWands} alt="Page Of Wands"  className='reversed'/>,
+    KnightOfWands: <img key={33} src={KnightOfWands} alt="Knight Of Wands"  className='reversed'/>,
+    QueenOfWands: <img key={34} src={QueenOfWands} alt="Queen Of Wands"  className='reversed'/>,
+    KingOfWands: <img key={35} src={KingOfWands} alt="King Of Wands"  className='reversed'/>,
 
+    AceOfCups: <img key={36} src={AceOfCups} alt="Ace Of Cups"  className='reversed'/>,
+    TwoOfCups: <img key={37} src={TwoOfCups} alt="Two Of Cups"  className='reversed'/>,
+    ThreeOfCups: <img key={38} src={ThreeOfCups} alt="Three Of Cups"  className='reversed'/>,
+    FourOfCups: <img key={39} src={FourOfCups} alt="Four Of Cups"  className='reversed'/>,
+    FiveOfCups: <img key={40} src={FiveOfCups} alt="Five Of Cups"  className='reversed'/>,
+    SixOfCups: <img key={41} src={SixOfCups} alt="Six Of Cups"  className='reversed'/>,
+    SevenOfCups: <img key={42} src={SevenOfCups} alt="Seven Of Cups"  className='reversed'/>,
+    EightOfCups: <img key={43} src={EightOfCups} alt="Eight Of Cups"  className='reversed'/>,
+    NineOfCups: <img key={44} src={NineOfCups} alt="Nine Of Cups"  className='reversed'/>,
+    TenOfCups: <img key={45} src={TenOfCups} alt="Ten Of Cups"  className='reversed'/>,
+    PageOfCups: <img key={46} src={PageOfCups} alt="Page Of Cups"  className='reversed'/>,
+    KnightOfCups: <img key={47} src={KnightOfCups} alt="Knight Of Cups"  className='reversed'/>,
+    QueenOfCups: <img key={48} src={QueenOfCups} alt="Queen Of Cups"  className='reversed'/>,
+    KingOfCups: <img key={49} src={KingOfCups} alt="King Of Cups"  className='reversed'/>,
 
+    AceOfSwords: <img key={50} src={AceOfSwords} alt="Ace Of Swords"  className='reversed'/>,
+    TwoOfSwords: <img key={51} src={TwoOfSwords} alt="Two Of Swords"  className='reversed'/>,
+    ThreeOfSwords: <img key={52} src={ThreeOfSwords} alt="Three Of Swords"  className='reversed'/>,
+    FourOfSwords: <img key={53} src={FourOfSwords} alt="Four Of Swords"  className='reversed'/>,
+    FiveOfSwords: <img key={54} src={FiveOfSwords} alt="Five Of Swords"  className='reversed'/>,
+    SixOfSwords: <img key={55} src={SixOfSwords} alt="Six Of Swords"  className='reversed'/>,
+    SevenOfSwords: <img key={56} src={SevenOfSwords} alt="Seven Of Swords"  className='reversed'/>,
+    EightOfSwords: <img key={57} src={EightOfSwords} alt="Eight Of Swords"  className='reversed'/>,
+    NineOfSwords: <img key={58} src={NineOfSwords} alt="Nine Of Swords"  className='reversed'/>,
+    TenOfSwords: <img key={59} src={TenOfSwords} alt="Ten Of Swords"  className='reversed'/>,
+    PageOfSwords: <img key={60} src={PageOfSwords} alt="Page Of Swords"  className='reversed'/>,
+    KnightOfSwords: <img key={61} src={KnightOfSwords} alt="Knight Of Swords"  className='reversed'/>,
+    QueenOfSwords: <img key={62} src={QueenOfSwords} alt="Queen Of Swords"  className='reversed'/>,
+    KingOfSwords: <img key={63} src={KingOfSwords} alt="King Of Swords"  className='reversed'/>,
+
+    AceOfPentacles: <img key={64} src={AceOfPentacles} alt="Ace Of Pentacles"  className='reversed'/>,
+    TwoOfPentacles: <img key={65} src={TwoOfPentacles} alt="Two Of Pentacles"  className='reversed'/>,
+    ThreeOfPentacles: <img key={66} src={ThreeOfPentacles} alt="Three Of Pentacles"  className='reversed'/>,
+    FourOfPentacles: <img key={67} src={FourOfPentacles} alt="Four Of Pentacles"  className='reversed'/>,
+    FiveOfPentacles: <img key={68} src={FiveOfPentacles} alt="Five Of Pentacles"  className='reversed'/>,
+    SixOfPentacles: <img key={69} src={SixOfPentacles} alt="Six Of Pentacles"  className='reversed'/>,
+    SevenOfPentacles: <img key={70} src={SevenOfPentacles} alt="Seven Of Pentacles"  className='reversed'/>,
+    EightOfPentacles: <img key={71} src={EightOfPentacles} alt="Eight Of Pentacles"  className='reversed'/>,
+    NineOfPentacles: <img key={72} src={NineOfPentacles} alt="Nine Of Pentacles"  className='reversed'/>,
+    TenOfPentacles: <img key={73} src={TenOfPentacles} alt="Ten Of Pentacles"  className='reversed'/>,
+    PageOfPentacles: <img key={74} src={PageOfPentacles} alt="Page Of Pentacles"  className='reversed'/>,
+    KnightOfPentacles: <img key={75} src={KnightOfPentacles} alt="Knight Of Pentacles"  className='reversed'/>,
+    QueenOfPentacles: <img key={76} src={QueenOfPentacles} alt="Queen Of Pentacles"  className='reversed'/>,
+    KingOfPentacles: <img key={77} src={KingOfPentacles} alt="King Of Pentacles"  className='reversed'/>,
+
+    Back: <img key={77} src={Back} alt="back of card" className='tarot-img reversed' />
+};
