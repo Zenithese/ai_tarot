@@ -60,7 +60,6 @@ const App = () => {
 
   const AIReading = async () => {
     const { theme, arrangement } = reading()
-    console.log(`Bearer ${process.env.REACT_APP_CHATGPTKEY}`)
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       // mode: "cors", // no-cors, *cors, same-origin
