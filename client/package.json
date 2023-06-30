@@ -1,6 +1,6 @@
 {
   "homepage": "https://zenithese.github.io/ai_tarot",
-  "name": "tarot-reading-app-2",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
