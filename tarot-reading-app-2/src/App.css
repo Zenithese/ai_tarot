@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  text-align: center;
+  background-color: slategray;
+  height: 100vh;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* cards */
+
+.deck{
+  width:100vw;
+  position:relative;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  font-family:verdana;
+}
+
+.card{
+  width:150px;
+  height: 300px;
+  margin: 10px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all .5s linear;
+  transition: all .5s linear;
+  border-radius:10px;
+}
+
+.face {
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-color:whitesmoke;  
+  border-radius:10px;
+}
+
+.front, .back{
+  transition: all .5s linear;
+}
+.back{
+  z-index:1;
+  box-shadow: 5px 5px 5px #aaa;
+}
+.front {
+  overflow:hidden;
+  z-index:-1;
+  display: block;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  box-sizing: border-box;
+}
+
+.back{
+  box-shadow: 0 0 0 #aaa;
+}
+
+.flipped, .hovercard:hover{
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  /* .front{
+    box-shadow:0 0 0 #aaa;
+  }
+  .back{
+    box-shadow: 5px 5px 5px #aaa;
+  } */
+}
+
+.tarot-img {
+  border-radius: 10px;
+}
+
+.reversed {
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
