@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { tarotDeck } from './tarotDeck';
+import { tarotDeck, tarotNames } from './tarotDeck';
 import Card from './components/Card';
 
 const App = () => {
@@ -60,40 +60,26 @@ const App = () => {
 
   const AIReading = async () => {
     const { theme, arrangement } = reading()
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    // const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("http://localhost:3001", {
       method: "POST",
-      // mode: "cors", // no-cors, *cors, same-origin
-      // cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      // credentials: "same-origin", // include, *same-origin, omit
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.REACT_APP_CHATGPTKEY}`
       },
-      // redirect: "follow", // manual, *follow, error
-      // referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify({
-        "model": "gpt-3.5-turbo",
-        // "messages": [
-        //     { "role": "system", "content": `Give a tarot reading.` },
-        //     { "role": "user", "content": `Please randomly select 3 tarot cards and interpret them considering this question: ${question.length ? question : 'can you give me a general reading'}?.` }
-        // ]
         "messages": [
           { "role": "system", "content": `Give a tarot reading.` },
-          { "role": "user", "content": `Using this array of tarot cards ${arrangement} and the following theme: ${theme}, interpret them considering this question: ${question.length ? question : 'can you give me a general reading'}?.` }
+          { "role": "user", "content": `Using this array of tarot cards ${arrangement} and the following theme: ${theme}, interpret them considering this intention: ${question.length ? question : 'give me a general reading'}.` }
         ]
-        // "messages": [
-        //     { "role": "system", "content": `Suggest a beer.` },
-        //     { "role": "user", "content": `Please recommend some beers and their respective flavor profiles based on the following description/profile/question: ${question.length ? question : 'can you suggest a popular craft beer and what its flavor profile is'}?.` }
-        // ]
-      }), // body data type must match "Content-Type" header
+      }),
     });
     const jsonData = await response.json();
     console.log(jsonData)
-    setTarotReading(jsonData.choices[0].message.content)
+    setTarotReading(jsonData.reading)
   }
 
   const formatTarotReading = tarotReading.split("\n\n").map((p, i) => {
-    if (i === 0) {
+    if (i === 0 && tarotNames.some(name => p.includes(name.toLowerCase()))) {
       return (
         <>
           <p key={0} className='indent-8 text-left leading-loose w-[90%] my-3 mx-auto'>{`${theme}:`}</p>
@@ -114,12 +100,12 @@ const App = () => {
   }
 
   return (
-    <div className="App">
+    <div className={`App ${tarotReading.length ? 'overflow-hidden' : ''}`}>
       <h1>Tarot Card Reader</h1>
       <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCard} disabled={drawnCards.length >= 5}>Draw a card</button>
       <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
       <h1>Ask the cards a question</h1>
-      <input className='m-2' onChange={(e) => setQuestion(e.target.value)}></input>
+      <textarea className='m-2' onChange={(e) => setQuestion(e.target.value)} />
       {drawnCards.length > 0 && (
         <div className='flex flex-row flex-wrap justify-center my-5 deck'>
           {drawnCards.map((card) => (
@@ -130,7 +116,7 @@ const App = () => {
       {drawnCards.length > 1 && <button className='border-2 border-black p-2 m-2' onClick={AIReading}>Get Reading</button>}
       {
         tarotReading.length ?
-          <div className='bg-black opacity-75 absolute w-[95%] m-auto h-[100vh] overflow-scroll text-white top-0 left-0 right-0 bottom-0 flex flex-col'>
+          <div className='bg-black opacity-75 absolute w-[95%] m-auto h-[100%] overflow-scroll text-white top-0 left-0 right-0 bottom-0 flex flex-col'>
             <div className='flex m-auto flex-col'>
               {formatTarotReading}
               <button className='border-2 border-white p-2 m-2' onClick={() => handleNewReading()}>New Reading</button>
