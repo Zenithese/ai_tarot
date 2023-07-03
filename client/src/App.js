@@ -104,10 +104,10 @@ const App = () => {
       <div className='text-[18px] mb-[15px]'>
         <select value={selectedSpread} onChange={(e) => setSelectedSpread(e.target.value)}>
           <option value={'1 card'}>1 card</option>
-          <option value={'2 cards'}>2 card</option>
-          <option value={'3 cards'}>3 card</option>
-          <option value={'4 cards'}>4 card</option>
-          <option value={'5 cards'}>5 card</option>
+          <option value={'2 cards'}>2 cards</option>
+          <option value={'3 cards'}>3 cards</option>
+          <option value={'4 cards'}>4 cards</option>
+          <option value={'5 cards'}>5 cards</option>
         </select>
       </div>
       <div>
