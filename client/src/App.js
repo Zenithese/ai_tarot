@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { tarotDeck, tarotNames } from './tarotDeck';
-import Card from './components/Card';
+import Spread from './components/Spread';
 
 const App = () => {
   const [drawnCards, setDrawnCards] = useState([]);
@@ -9,6 +9,27 @@ const App = () => {
   const [question, setQuestion] = useState('')
   const [tarotReading, setTarotReading] = useState('')
   const [theme, setTheme] = useState('')
+  const [selectedSpread, setSelectedSpread] = useState('1 card')
+
+  useEffect(() => {
+    const overflow = Number(selectedSpread.split('')[0]) - drawnCards.length
+    if (overflow < 0) {
+      for (let i = overflow; i < 0; i++) {
+        drawnCards.pop()
+      }
+    }
+    if (Number(selectedSpread.split('')[0]) === 1) {
+      setTheme('A message from the universe');
+    } else if (Number(selectedSpread.split('')[0]) === 2) {
+      setTheme('The situation and the challenge');
+    } else if (Number(selectedSpread.split('')[0]) === 3) {
+      setTheme('The past, present, and future');
+    } else if (Number(selectedSpread.split('')[0]) === 4) {
+      setTheme('The four elements and how they influence the situation');
+    } else if (Number(selectedSpread.split('')[0]) === 5) {
+      setTheme('The cross formation');
+    }
+  }, [selectedSpread])
 
   const drawCard = () => {
     const randomIndex = Math.floor(Math.random() * deck.length);
@@ -34,32 +55,11 @@ const App = () => {
     // const meanings = drawnCards.map(card => `${card.name} ${card.reversed ? '(reversed)' : '(upright)'}: ${card.reversed ? card.meanings.reversed : card.meanings.upright}`);
     const arrangement = drawnCards.map(card => `${card.name} ${card.reversed ? '(reversed)' : '(upright)'}`)
 
-    // Determine the overall theme of the reading based on the number of cards drawn
-    let theme = '';
-    if (drawnCards.length === 1) {
-      theme = 'A message from the universe';
-    } else if (drawnCards.length === 2) {
-      theme = 'The situation and the challenge';
-    } else if (drawnCards.length === 3) {
-      theme = 'The past, present, and future';
-    } else if (drawnCards.length === 4) {
-      theme = 'The four elements and how they influence the situation';
-    } else if (drawnCards.length === 5) {
-      theme = 'The cross and the staff (a Celtic Cross reading)';
-    }
-
-    // // Combine the card meanings and the theme into a single reading
-    // const fullReading = `Your ${theme}:\n\n${meanings.join('\n\n')}`;
-
-    // // Display the reading to the user
-    // alert(fullReading);
-
-    setTheme(theme)
-    return { theme, arrangement }
+    return { arrangement }
   };
 
   const AIReading = async () => {
-    const { theme, arrangement } = reading()
+    const { arrangement } = reading()
     const response = await fetch("https://ai-tarot.onrender.com", {
       method: "POST",
       headers: {
@@ -100,19 +100,31 @@ const App = () => {
 
   return (
     <div className={`App ${tarotReading.length ? 'overflow-hidden' : ''}`}>
-      <h1>Tarot Card Reader</h1>
-      <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCard} disabled={drawnCards.length >= 5}>Draw a card</button>
+      <h1 className='text-[20px] mb-[15px]'>Tarot Card Reader</h1>
+      <div className='text-[18px] mb-[15px]'>
+        <select value={selectedSpread} onChange={(e) => setSelectedSpread(e.target.value)}>
+          <option value={'1 card'}>1 card</option>
+          <option value={'2 cards'}>2 card</option>
+          <option value={'3 cards'}>3 card</option>
+          <option value={'4 cards'}>4 card</option>
+          <option value={'5 cards'}>5 card</option>
+        </select>
+      </div>
+      <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCard} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw a card</button>
       <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
       <h1>Ask the cards a question</h1>
-      <textarea className='m-2' onChange={(e) => setQuestion(e.target.value)} />
+      <textarea className='m-2 mb-[10px]' onChange={(e) => setQuestion(e.target.value)} />
+      <div>
+        <p className='text-[20px] underline'>
+          {theme}
+        </p>
+      </div>
       {drawnCards.length > 0 && (
-        <div className='flex flex-row flex-wrap justify-center my-5 deck'>
-          {drawnCards.map((card) => (
-            <Card card={card} />
-          ))}
-        </div>
+        <Spread drawnCards={drawnCards} selectedSpread={selectedSpread} />
       )}
-      {drawnCards.length > 1 && <button className='border-2 border-black p-2 m-2' onClick={AIReading}>Get Reading</button>}
+      {drawnCards.length == selectedSpread.slice(0,1) && (
+        <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={AIReading} disabled={drawnCards.length < Number(selectedSpread.split('')[0])}>Get Reading</button>
+      )}
       {
         tarotReading.length ?
           <div className='bg-black opacity-75 absolute w-[95%] m-auto h-[100%] overflow-scroll text-white top-0 left-0 right-0 bottom-0 flex flex-col'>

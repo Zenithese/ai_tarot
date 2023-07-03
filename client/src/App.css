@@ -54,14 +54,54 @@
 }
 
 .card{
-  width:150px;
-  height: 300px;
+  width: 150px;
+  height: 250px;
   margin: 10px;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-transition: all .5s linear;
   transition: all .5s linear;
   border-radius:10px;
+  margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .card{
+    width: 100px;
+    height: 180px;
+    margin: 10px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all .5s linear;
+    transition: all .5s linear;
+    border-radius:10px;
+    margin: auto;
+  }
+}
+
+.grid-card{
+  width: 150px;
+  height: 250px;
+  margin: 10px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all .5s linear;
+  transition: all .5s linear;
+  border-radius:10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .grid-card{
+    width: 100px;
+    height: 180px;
+    margin: 10px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all .5s linear;
+    transition: all .5s linear;
+    border-radius:10px;
+
+  }
 }
 
 .face {
