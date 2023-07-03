@@ -115,7 +115,7 @@ const App = () => {
 
   return (
     <div className={`App ${tarotReading.length ? 'overflow-hidden' : ''}`}>
-      <h1 className='text-[20px] mb-[15px]'>Tarot Card Reader</h1>
+      <h1 className='text-[20px] mb-[15px] mt-5'>Tarot Card Reader</h1>
       <div className='text-[18px] mb-[15px]'>
         <select value={selectedSpread} onChange={(e) => setSelectedSpread(e.target.value)}>
           <option value={'1 card'}>1 card</option>
@@ -138,7 +138,7 @@ const App = () => {
         <Spread drawnCards={drawnCards} selectedSpread={selectedSpread} />
       )}
       {drawnCards.length === Number(selectedSpread.slice(0,1)) && (
-        <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={AIReading} disabled={drawnCards.length < Number(selectedSpread.split('')[0])}>Get Reading</button>
+        <button className='border-2 border-black p-2 m-2 mb-20 disabled:opacity-50' onClick={AIReading} disabled={drawnCards.length < Number(selectedSpread.split('')[0])}>Get Reading</button>
       )}
       {
         tarotReading.length > 0 &&
