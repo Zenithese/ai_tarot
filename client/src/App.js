@@ -110,15 +110,15 @@ const App = () => {
           <option value={'5 cards'}>5 card</option>
         </select>
       </div>
-      <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCard} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw a card</button>
-      <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
-      <h1>Ask the cards a question</h1>
-      <textarea className='m-2 mb-[10px]' onChange={(e) => setQuestion(e.target.value)} />
       <div>
-        <p className='text-[20px] underline'>
+        <p className='text-[20px] underline mb-[5px]'>
           {theme}
         </p>
       </div>
+      <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCard} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw a card</button>
+      <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
+      <h1>Give the cards an intention</h1>
+      <textarea className='m-2 mb-[10px]' onChange={(e) => setQuestion(e.target.value)} />
       {drawnCards.length > 0 && (
         <Spread drawnCards={drawnCards} selectedSpread={selectedSpread} />
       )}
