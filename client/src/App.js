@@ -137,7 +137,7 @@ const App = () => {
         <h1>Give the cards an intention</h1>
         <textarea className='m-2 mb-[10px]' onChange={(e) => setQuestion(e.target.value)} />
       </div>
-      <div className={`${(tarotReading.length || fetching) ? 'fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]' : ''}`}>
+      <div className={`${(tarotReading.length || fetching) ? 'fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[100%]' : ''}`}>
         {drawnCards.length > 0 && (
           <Spread drawnCards={drawnCards} selectedSpread={selectedSpread} />
         )}
