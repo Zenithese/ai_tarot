@@ -10,6 +10,8 @@ const App = () => {
   const [tarotReading, setTarotReading] = useState('')
   const [theme, setTheme] = useState('')
   const [selectedSpread, setSelectedSpread] = useState('1 card')
+  const [fetching, setFetching] = useState(false)
+  const [fetchingMessage, setFetchingMessage] = useState('Blessings to those who wait')
 
   useEffect(() => {
     const overflow = Number(selectedSpread.split('')[0]) - drawnCards.length
@@ -29,7 +31,18 @@ const App = () => {
     } else if (Number(selectedSpread.split('')[0]) === 5) {
       setTheme('The cross formation');
     }
-  }, [selectedSpread])
+  }, [selectedSpread, drawnCards])
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (fetching) {
+        if (!fetchingMessage.includes('.')) setFetchingMessage('Blessings to those who wait.')
+        else if (fetchingMessage.includes('.') && !fetchingMessage.includes('..')) setFetchingMessage('Blessings to those who wait..')
+        else if (fetchingMessage.includes('..') && !fetchingMessage.includes('...')) setFetchingMessage('Blessings to those who wait...')
+        else setFetchingMessage('Blessings to those who wait')
+      }
+    }, 1000)
+  }, [fetching, fetchingMessage])
 
   const drawCard = () => {
     const randomIndex = Math.floor(Math.random() * deck.length);
@@ -59,6 +72,7 @@ const App = () => {
   };
 
   const AIReading = async () => {
+    setFetching(true)
     const { arrangement } = reading()
     const response = await fetch("https://ai-tarot.onrender.com", {
       method: "POST",
@@ -75,6 +89,7 @@ const App = () => {
     const jsonData = await response.json();
     console.log(jsonData)
     setTarotReading(jsonData.reading)
+    setFetching(false)
   }
 
   const formatTarotReading = tarotReading.split("\n\n").map((p, i) => {
@@ -122,19 +137,25 @@ const App = () => {
       {drawnCards.length > 0 && (
         <Spread drawnCards={drawnCards} selectedSpread={selectedSpread} />
       )}
-      {drawnCards.length == selectedSpread.slice(0,1) && (
+      {drawnCards.length === Number(selectedSpread.slice(0,1)) && (
         <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={AIReading} disabled={drawnCards.length < Number(selectedSpread.split('')[0])}>Get Reading</button>
       )}
       {
-        tarotReading.length ?
+        tarotReading.length > 0 &&
           <div className='bg-black opacity-75 absolute w-[95%] m-auto h-[100%] overflow-scroll text-white top-0 left-0 right-0 bottom-0 flex flex-col'>
             <div className='flex m-auto flex-col'>
               {formatTarotReading}
               <button className='border-2 border-white p-2 m-2' onClick={() => handleNewReading()}>New Reading</button>
             </div>
           </div>
-          :
-          null
+      }
+      {
+        fetching &&
+          <div className='bg-black opacity-75 absolute w-[95%] m-auto h-[100%] overflow-scroll text-white top-0 left-0 right-0 bottom-0 flex flex-col'>
+            <div className='w-[220px] text-left absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
+              {fetchingMessage}
+            </div>
+          </div>
       }
     </div>
   );
