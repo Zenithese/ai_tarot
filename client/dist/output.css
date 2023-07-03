@@ -559,6 +559,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -631,6 +635,10 @@ video {
   margin-bottom: 50px;
 }
 
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
 .mb-\[10px\] {
   margin-bottom: 10px;
 }
@@ -645,22 +653,6 @@ video {
 
 .mb-\[5px\] {
   margin-bottom: 5px;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-.mb-20 {
-  margin-bottom: 5rem;
-}
-
-.mt-20 {
-  margin-top: 5rem;
-}
-
-.mt-10 {
-  margin-top: 2.5rem;
 }
 
 .mt-5 {
@@ -683,6 +675,14 @@ video {
   height: 100%;
 }
 
+.h-\[100vh\] {
+  height: 100vh;
+}
+
+.h-0 {
+  height: 0px;
+}
+
 .w-\[220px\] {
   width: 220px;
 }
@@ -693,6 +693,18 @@ video {
 
 .w-\[95\%\] {
   width: 95%;
+}
+
+.w-\[300\] {
+  width: 300;
+}
+
+.w-\[300px\] {
+  width: 300px;
+}
+
+.w-\[300pc\] {
+  width: 300pc;
 }
 
 .max-w-\[400px\] {
@@ -811,10 +823,19 @@ video {
   transition-duration: 150ms;
 }
 
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .App {
   text-align: center;
   background-color: slategray;
-  height: 100vh;
 }
 
 .App-logo {
