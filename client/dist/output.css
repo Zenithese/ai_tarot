@@ -607,6 +607,10 @@ video {
   grid-column-start: 2;
 }
 
+.col-start-4 {
+  grid-column-start: 4;
+}
+
 .m-2 {
   margin: 0.5rem;
 }
@@ -681,6 +685,18 @@ video {
 
 .h-0 {
   height: 0px;
+}
+
+.h-\[305px\] {
+  height: 305px;
+}
+
+.h-\[255px\] {
+  height: 255px;
+}
+
+.h-\[255\.34px\] {
+  height: 255.34px;
 }
 
 .w-\[220px\] {

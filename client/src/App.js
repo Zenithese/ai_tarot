@@ -30,7 +30,7 @@ const App = () => {
     } else if (Number(selectedSpread.split('')[0]) === 4) {
       setTheme('The four elements and how they influence the situation');
     } else if (Number(selectedSpread.split('')[0]) === 5) {
-      setTheme('The cross formation');
+      setTheme('Past, present, future, reason and potential cross formation');
     }
   }, [selectedSpread, drawnCards])
 
@@ -75,21 +75,29 @@ const App = () => {
   const AIReading = async () => {
     setFetching(true)
     const { arrangement } = reading()
-    const response = await fetch("https://ai-tarot.onrender.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        "messages": [
-          { "role": "system", "content": `Give a tarot reading.` },
-          { "role": "user", "content": `Using this array of tarot cards ${arrangement} and the following theme: ${theme}, interpret them considering this intention: ${question.length ? question : 'give me a general reading'}. Make sure to comment on the imagery of the cards from The Rider Tarot Deck.` }
-        ]
-      }),
-    });
-    const jsonData = await response.json();
-    console.log(jsonData)
-    setTarotReading(jsonData.reading)
+    const response = await fetch(
+      "https://ai-tarot.onrender.com",
+      // "http://localhost:3001",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          arrangement,
+          theme,
+          question
+        }),
+      });
+
+    if (response.ok) {
+      setTarotReading(await response.json().reading)
+    } else {
+      const data = await response.json()
+      const error = (data && data.message) || response.status;
+      console.log(error)
+      alert('Something went wrong. Please try again later.')
+    }
     setFetching(false)
   }
 
@@ -116,7 +124,7 @@ const App = () => {
 
   return (
     <div className={`App ${tarotReading.length ? 'overflow-hidden h-[100vh]' : ''}`}>
-      <div className={`App ${tarotReading.length || fetching? 'overflow-hidden h-0' : ''}`}>
+      <div className={`App ${tarotReading.length || fetching ? 'overflow-hidden h-0' : ''}`}>
         <h1 className='text-[20px] mb-[15px] mt-5'>Tarot Card Reader</h1>
         <div className='text-[18px] mb-[15px]'>
           <select value={selectedSpread} onChange={(e) => setSelectedSpread(e.target.value)}>
@@ -142,7 +150,7 @@ const App = () => {
           <Spread drawnCards={drawnCards} selectedSpread={selectedSpread} />
         )}
         {!(tarotReading.length || fetching) && drawnCards.length === Number(selectedSpread.slice(0, 1)) && (
-          <button className={ `border-2 border-black p-2 m-2 mb-20 disabled:opacity-50`} onClick={AIReading} disabled={drawnCards.length < Number(selectedSpread.split('')[0])}>Get Reading</button>
+          <button className={`border-2 border-black p-2 m-2 mb-20 disabled:opacity-50`} onClick={AIReading} disabled={drawnCards.length < Number(selectedSpread.split('')[0])}>Get Reading</button>
         )}
       </div>
       {
