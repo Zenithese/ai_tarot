@@ -699,6 +699,22 @@ video {
   height: 255.34px;
 }
 
+.h-\[1\] {
+  height: 1;
+}
+
+.h-\[169\] {
+  height: 169;
+}
+
+.h-\[169\.33\] {
+  height: 169.33;
+}
+
+.h-\[169\.33px\] {
+  height: 169.33px;
+}
+
 .w-\[220px\] {
   width: 220px;
 }
@@ -1009,5 +1025,9 @@ video {
   .sm\:my-10 {
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
+  }
+
+  .sm\:h-\[255\.34px\] {
+    height: 255.34px;
   }
 }
