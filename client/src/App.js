@@ -76,8 +76,8 @@ const App = () => {
     setFetching(true)
     const { arrangement } = reading()
     const response = await fetch(
-      "https://ai-tarot.onrender.com",
       // "http://localhost:3001",
+      "https://ai-tarot.onrender.com",
       {
         method: "POST",
         headers: {
@@ -90,14 +90,18 @@ const App = () => {
         }),
       });
 
-    if (response.ok) {
-      setTarotReading(await response.json().reading)
-    } else {
+    if (!response.ok) {
       const data = await response.json()
       const error = (data && data.message) || response.status;
       console.log(error)
       alert('Something went wrong. Please try again later.')
+      setFetching(false)
+      return Promise.reject(error)
     }
+
+    const jsonData = await response.json()
+    console.log(jsonData.reading)
+    setTarotReading(jsonData.reading)
     setFetching(false)
   }
 
@@ -110,9 +114,9 @@ const App = () => {
       )
     } else {
       return (
-        <>
-          <p index={i} className='indent-8 text-left leading-loose w-[90%] my-3 mx-auto'>{p}</p>
-        </>
+        <div key={i}>
+          <p className='indent-8 text-left leading-loose w-[90%] my-3 mx-auto'>{p}</p>
+        </div>
       )
     }
   })
