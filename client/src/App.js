@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { tarotDeck, tarotNames } from './tarotDeck';
 import Spread from './components/Spread';
+import { DrawDeck } from './components/DrawDeck';
 
 const App = () => {
 
@@ -128,7 +129,7 @@ const App = () => {
 
   return (
     <div className={`App ${tarotReading.length ? 'overflow-hidden h-[100vh]' : ''}`}>
-      <div className={`App ${tarotReading.length || fetching ? 'overflow-hidden h-0' : ''}`}>
+      {/* <div className={`App ${tarotReading.length || fetching ? 'overflow-hidden h-0' : ''}`}>
         <h1 className='text-[20px] mb-[15px] mt-5'>Tarot Card Reader</h1>
         <div className='text-[18px] mb-[15px]'>
           <select value={selectedSpread} onChange={(e) => setSelectedSpread(e.target.value)}>
@@ -173,7 +174,8 @@ const App = () => {
             {fetchingMessage}
           </div>
         </div>
-      }
+      } */}
+      <DrawDeck deck={deck} setDeck={setDeck} />
     </div>
   );
 

@@ -67,12 +67,30 @@
 @media only screen and (max-width: 600px) {
   .card{
     width: 100px;
-    height: 180px;
+    height: 170.7px;
     margin: 10px;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-transition: all .5s linear;
     transition: all .5s linear;
+    border-radius:10px;
+    margin: auto;
+  }
+}
+
+.draw-card{
+  width: 150px;
+  height: 250px;
+  margin: 10px;
+  border-radius:10px;
+  margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .draw-card{
+    width: 100px;
+    height: 170.7px;
+    margin: 10px;
     border-radius:10px;
     margin: auto;
   }
