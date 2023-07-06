@@ -14,6 +14,13 @@ const App = () => {
   const [selectedSpread, setSelectedSpread] = useState('1 card')
   const [fetching, setFetching] = useState(false)
   const [fetchingMessage, setFetchingMessage] = useState('Blessings to those who wait')
+  const [drawing, setDrawing] = useState(false)
+
+  useEffect(() => {
+    if (drawnCards.length >= Number(selectedSpread.split('')[0])) {
+      setDrawing(false)
+    }
+  }, [drawnCards])
 
   useEffect(() => {
     const overflow = Number(selectedSpread.split('')[0]) - drawnCards.length
@@ -64,6 +71,10 @@ const App = () => {
     setDrawnCards([]);
     setDeck(tarotDeck);
   };
+
+  const drawCards = () => {
+    setDrawing(true)
+  }
 
   const reading = () => {
     // Create an array of card meanings based on the cards drawn, including whether they are reversed or upright
@@ -129,53 +140,58 @@ const App = () => {
 
   return (
     <div className={`App ${tarotReading.length ? 'overflow-hidden h-[100vh]' : ''}`}>
-      {/* <div className={`App ${tarotReading.length || fetching ? 'overflow-hidden h-0' : ''}`}>
-        <h1 className='text-[20px] mb-[15px] mt-5'>Tarot Card Reader</h1>
-        <div className='text-[18px] mb-[15px]'>
-          <select value={selectedSpread} onChange={(e) => setSelectedSpread(e.target.value)}>
-            <option value={'1 card'}>1 card</option>
-            <option value={'2 cards'}>2 cards</option>
-            <option value={'3 cards'}>3 cards</option>
-            <option value={'4 cards'}>4 cards</option>
-            <option value={'5 cards'}>5 cards</option>
-          </select>
-        </div>
-        <div>
-          <p className='text-[20px] underline mb-[5px]'>
-            {theme}
-          </p>
-        </div>
-        <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCard} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw a card</button>
-        <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
-        <h1>Give the cards an intention</h1>
-        <textarea className='m-2 mb-[10px]' onChange={(e) => setQuestion(e.target.value)} />
-      </div>
-      <div className={`${(tarotReading.length || fetching) ? 'fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[100%]' : ''}`}>
-        {drawnCards.length > 0 && (
-          <Spread drawnCards={drawnCards} selectedSpread={selectedSpread} />
-        )}
-        {!(tarotReading.length || fetching) && drawnCards.length === Number(selectedSpread.slice(0, 1)) && (
-          <button className={`border-2 border-black p-2 m-2 mb-20 disabled:opacity-50`} onClick={AIReading} disabled={drawnCards.length < Number(selectedSpread.split('')[0])}>Get Reading</button>
-        )}
-      </div>
       {
-        tarotReading.length > 0 &&
-        <div className='bg-black opacity-75 fixed w-[95%] m-auto h-[100%] overflow-scroll text-white top-0 left-0 right-0 top-0 flex flex-col'>
-          <div className='flex m-auto flex-col'>
-            {formatTarotReading}
-            <button className='border-2 border-white p-2 m-2' onClick={() => handleNewReading()}>New Reading</button>
-          </div>
-        </div>
-      }
-      {
-        fetching &&
-        <div className='bg-black opacity-75 absolute w-[95%] m-auto h-[100%] overflow-scroll text-white top-0 left-0 right-0 bottom-0 flex flex-col'>
-          <div className='w-[220px] text-left absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
-            {fetchingMessage}
-          </div>
-        </div>
-      } */}
-      <DrawDeck deck={deck} setDeck={setDeck} />
+        drawing ? <DrawDeck deck={deck} setDeck={setDeck} setDrawnCards={setDrawnCards} /> :
+          <>
+            <div className={`App ${tarotReading.length || fetching ? 'overflow-hidden h-0' : ''}`}>
+              <h1 className='text-[20px] mb-[15px] mt-5'>Tarot Card Reader</h1>
+              <div className='text-[18px] mb-[15px]'>
+                <select value={selectedSpread} onChange={(e) => setSelectedSpread(e.target.value)}>
+                  <option value={'1 card'}>1 card</option>
+                  <option value={'2 cards'}>2 cards</option>
+                  <option value={'3 cards'}>3 cards</option>
+                  <option value={'4 cards'}>4 cards</option>
+                  <option value={'5 cards'}>5 cards</option>
+                </select>
+              </div>
+              <div>
+                <p className='text-[20px] underline mb-[5px]'>
+                  {theme}
+                </p>
+              </div>
+              <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCards} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw cards</button>
+              <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCard} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw a card</button>
+              <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
+              <h1>Give the cards an intention</h1>
+              <textarea className='m-2 mb-[10px]' onChange={(e) => setQuestion(e.target.value)} />
+            </div>
+            <div className={`${(tarotReading.length || fetching) ? 'fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[100%]' : ''}`}>
+              {drawnCards.length > 0 && (
+                <Spread drawnCards={drawnCards} selectedSpread={selectedSpread} />
+              )}
+              {!(tarotReading.length || fetching) && drawnCards.length === Number(selectedSpread.slice(0, 1)) && (
+                <button className={`border-2 border-black p-2 m-2 mb-20 disabled:opacity-50`} onClick={AIReading} disabled={drawnCards.length < Number(selectedSpread.split('')[0])}>Get Reading</button>
+              )}
+            </div>
+            {
+              tarotReading.length > 0 &&
+              <div className='bg-black opacity-75 fixed w-[95%] m-auto h-[100%] overflow-scroll text-white top-0 left-0 right-0 top-0 flex flex-col'>
+                <div className='flex m-auto flex-col'>
+                  {formatTarotReading}
+                  <button className='border-2 border-white p-2 m-2' onClick={() => handleNewReading()}>New Reading</button>
+                </div>
+              </div>
+            }
+            {
+              fetching &&
+              <div className='bg-black opacity-75 absolute w-[95%] m-auto h-[100%] overflow-scroll text-white top-0 left-0 right-0 bottom-0 flex flex-col'>
+                <div className='w-[220px] text-left absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
+                  {fetchingMessage}
+                </div>
+              </div>
+            }
+          </>
+        }
     </div>
   );
 

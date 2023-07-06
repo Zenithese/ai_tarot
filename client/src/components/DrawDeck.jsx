@@ -2,21 +2,14 @@ import React, { useEffect, useState, useRef } from 'react'
 import DrawCard from './DrawCard'
 import useWindowSize from '../hooks/useWindowResize'
 
-export const DrawDeck = ({ deck, setDeck, type = true }) => {
+export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
 
     const windowSize = useWindowSize();
 
     const cardRef = useRef(null)
 
-
     const [leftZ, setLeftZ] = useState(0)
     const [rightZ, setRightZ] = useState(0)
-
-    useEffect(() => {
-        // console.log(windowSize.height)
-        // console.log(cardRef.current?.clientHeight)
-        console.log(deck.length)
-    })
 
     // useEffect(() => {
     //     shuffle()
@@ -62,7 +55,7 @@ export const DrawDeck = ({ deck, setDeck, type = true }) => {
                                 }
                             >
                                 <div ref={cardRef} >
-                                    <DrawCard card={card} reveal drawWidth={windowSize.width / 2} windowHeight={windowSize.height} />
+                                    <DrawCard card={card} reveal drawWidth={windowSize.width / 2} windowHeight={windowSize.height} setDrawnCards={setDrawnCards} />
                                 </div>
                             </div>
                         )
@@ -87,7 +80,7 @@ export const DrawDeck = ({ deck, setDeck, type = true }) => {
                                 }
                             >
                                 <div ref={cardRef} >
-                                    <DrawCard card={card} reveal drawWidth={windowSize.width / 2} windowHeight={windowSize.height} />
+                                    <DrawCard card={card} reveal drawWidth={windowSize.width / 2} windowHeight={windowSize.height} setDrawnCards={setDrawnCards} />
                                 </div>
                             </div>
                         )

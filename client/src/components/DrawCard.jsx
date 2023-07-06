@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { images, reversedImages } from '../tarotDeck2';
 
-const Card = ({ card, reveal, drawWidth, windowHeight }) => {
+const Card = ({ card, reveal, drawWidth, windowHeight, setDrawnCards }) => {
     const [flipped, setFlipped] = useState(false)
     const [top, setTop] = useState(0)
     const [left, setLeft] = useState(0)
@@ -19,10 +19,6 @@ const Card = ({ card, reveal, drawWidth, windowHeight }) => {
         }
     }, [reveal])
 
-    useEffect(() => {
-        console.log(drawWidth)
-        console.log(ref.current?.clientHeight)
-    })
     return (
         // card.reversed ?
         true ?
@@ -39,7 +35,12 @@ const Card = ({ card, reveal, drawWidth, windowHeight }) => {
                     setTransitionDuration('0s')
                 }}
                 onTouchEnd={(e) => {
-                    setTop(top < -75 ? -windowHeight - ref.current?.clientHeight : 0)
+                    if (top < -75) {
+                        setTop(top < -75 ? -windowHeight - ref.current?.clientHeight : 0)
+                        setDrawnCards((drawnCards) => {
+                            return [...drawnCards, card]
+                        })
+                    }
                     setLeft(0)
                     setTransitionDuration('0.3s')
                 }}
@@ -52,7 +53,29 @@ const Card = ({ card, reveal, drawWidth, windowHeight }) => {
                 </div>
             </div>
             :
-            <div className={`draw-card ${flipped ? 'flipped' : ''}`} style={{ width: drawWidth }}>
+            <div 
+                className={`draw-card ${flipped ? 'flipped' : ''}`} 
+                style={{ width: drawWidth, top, left, transitionDuration }}
+                onTouchStart={(e) => {
+                    setStartTop(e?.nativeEvent?.changedTouches[0]?.clientY)
+                    setStartLeft(e?.nativeEvent?.changedTouches[0]?.clientX)
+                }}
+                onTouchMove={(e) => {
+                    setTop(Math.min(0, -(startTop - e?.nativeEvent?.changedTouches[0]?.clientY)))
+                    setLeft(-(startLeft - e?.nativeEvent?.changedTouches[0]?.clientX))
+                    setTransitionDuration('0s')
+                }}
+                onTouchEnd={(e) => {
+                    if (top < -75) {
+                        setTop(top < -75 ? -windowHeight - ref.current?.clientHeight : 0)
+                        setDrawnCards((drawnCards) => {
+                            return [...drawnCards, card]
+                        })
+                    }
+                    setLeft(0)
+                    setTransitionDuration('0.3s')
+                }}
+            >
                 <div className='front face'>
                     {images[card.name.split(' ').map((string) => string.charAt(0).toUpperCase() + string.slice(1)).join('')]}
                 </div>
