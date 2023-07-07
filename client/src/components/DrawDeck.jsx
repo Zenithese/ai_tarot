@@ -33,7 +33,10 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
     }
 
     return (
-        <div className='grid grid-cols-2 m-auto overflow-hidden' style={{ height: windowSize.height, zIndex: leftZ }}>
+        <div 
+            className='grid grid-cols-2 m-auto overflow-hidden no-touch-action' 
+            style={{ height: windowSize.height, zIndex: leftZ }}
+        >
             <div
                 className='grid grid-cols-1'
                 style={{ width: windowSize.width / 2 }}

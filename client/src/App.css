@@ -143,3 +143,7 @@
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
+
+.no-touch-action {
+  touch-action: none;
+}
