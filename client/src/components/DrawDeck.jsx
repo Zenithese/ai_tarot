@@ -11,29 +11,26 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
     const [leftZ, setLeftZ] = useState(0)
     const [rightZ, setRightZ] = useState(0)
 
-    // useEffect(() => {
-    //     shuffle()
-    // }, [])
+    useEffect(() => {
+        shuffle()
+    }, [])
 
-    // const shuffle = () => {
-    //     const newDeck = [...deck];
-    //     const suffledDeck = []
-    //     while (newDeck.length) {
-    //         const randomIndex = Math.floor(Math.random() * newDeck.length);
-    //         const card = newDeck[randomIndex];
-    //         const reversed = Math.random() < 0.5; // Determine whether the card is reversed
-    //         const newCard = {
-    //             ...card,
-    //             reversed: reversed
-    //         };
-    //         newDeck.splice(randomIndex, 1); // Remove the drawn card from the deck
-    //         suffledDeck.push(newCard);
-    //     }
-    //     console.log(suffledDeck)
-    //     setDeck(suffledDeck);
-    // }
-
-
+    const shuffle = () => {
+        const newDeck = [...deck];
+        const suffledDeck = []
+        while (newDeck.length) {
+            const randomIndex = Math.floor(Math.random() * newDeck.length);
+            const card = newDeck[randomIndex];
+            const reversed = Math.random() < 0.5; // Determine whether the card is reversed
+            const newCard = {
+                ...card,
+                reversed: reversed
+            };
+            newDeck.splice(randomIndex, 1); // Remove the drawn card from the deck
+            suffledDeck.push(newCard);
+        }
+        setDeck(suffledDeck);
+    }
 
     return (
         <div className='grid grid-cols-2 m-auto overflow-hidden' style={{ height: windowSize.height, zIndex: leftZ }}>
