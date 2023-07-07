@@ -32,27 +32,19 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
         setDeck(suffledDeck);
     }
 
-    return (
-        <div 
-            className='grid grid-cols-2 m-auto overflow-hidden no-touch-action' 
-            style={{ height: windowSize.height, zIndex: leftZ }}
-        >
+    if (windowSize.width > 600) {
+        return (
             <div
-                className='grid grid-cols-1'
-                style={{ width: windowSize.width / 2 }}
-                onTouchStart={() => {
-                    setLeftZ(100)
-                    setRightZ(0)
-                }}
+                className='flex flex-row flex-wrap'
             >
                 {
-                    deck.slice(0, 39).map(card => {
+                    deck.map(card => {
                         return (
                             <div key={card.id} className='m-auto'
                                 style={{
-                                    height: (windowSize.height) / 39
-                                }
-                                }
+                                    // height: (windowSize.height) / 39,
+                                    width: 20
+                                }}
                             >
                                 <div ref={cardRef} >
                                     <DrawCard card={card} reveal drawWidth={windowSize.width / 2} windowHeight={windowSize.height} setDrawnCards={setDrawnCards} />
@@ -62,31 +54,64 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
                     })
                 }
             </div>
+        )
+    } else {
+        return (
             <div
-                className='grid grid-cols-1'
-                style={{ width: cardRef.current?.clientWidth / 2, zIndex: rightZ }}
-                onTouchStart={() => {
-                    setLeftZ(0)
-                    setRightZ(100)
-                }}
+                className='grid grid-cols-2 m-auto overflow-hidden no-touch-action'
+                style={{ height: windowSize.height, zIndex: leftZ }}
             >
-                {
-                    deck.slice(39).map(card => {
-                        return (
-                            <div key={card.id} className='m-auto'
-                                style={{
-                                    height: (windowSize.height) / 39
-                                }
-                                }
-                            >
-                                <div ref={cardRef} >
-                                    <DrawCard card={card} reveal drawWidth={windowSize.width / 2} windowHeight={windowSize.height} setDrawnCards={setDrawnCards} />
+                <div
+                    className='grid grid-cols-1'
+                    style={{ width: windowSize.width / 2 }}
+                    onTouchStart={() => {
+                        setLeftZ(100)
+                        setRightZ(0)
+                    }}
+                >
+                    {
+                        deck.slice(0, 39).map(card => {
+                            return (
+                                <div key={card.id} className='m-auto'
+                                    style={{
+                                        height: (windowSize.height) / 39
+                                    }
+                                    }
+                                >
+                                    <div ref={cardRef} >
+                                        <DrawCard card={card} reveal drawWidth={windowSize.width / 2} windowHeight={windowSize.height} setDrawnCards={setDrawnCards} />
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
+                </div>
+                <div
+                    className='grid grid-cols-1'
+                    style={{ width: cardRef.current?.clientWidth / 2, zIndex: rightZ }}
+                    onTouchStart={() => {
+                        setLeftZ(0)
+                        setRightZ(100)
+                    }}
+                >
+                    {
+                        deck.slice(39).map(card => {
+                            return (
+                                <div key={card.id} className='m-auto'
+                                    style={{
+                                        height: (windowSize.height) / 39
+                                    }
+                                    }
+                                >
+                                    <div ref={cardRef} >
+                                        <DrawCard card={card} reveal drawWidth={windowSize.width / 2} windowHeight={windowSize.height} setDrawnCards={setDrawnCards} />
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
