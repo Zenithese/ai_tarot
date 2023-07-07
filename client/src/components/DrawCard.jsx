@@ -8,6 +8,7 @@ const Card = ({ card, reveal, drawWidth, windowHeight, setDrawnCards }) => {
     const [startTop, setStartTop] = useState(0)
     const [startLeft, setStartLeft] = useState(0)
     const [transitionDuration, setTransitionDuration] = useState('0.3s')
+    const [draggable, setDraggable] = useState(false)
 
     const ref = useRef(null)
 
@@ -18,6 +19,22 @@ const Card = ({ card, reveal, drawWidth, windowHeight, setDrawnCards }) => {
             }, 500)
         }
     }, [reveal])
+
+    // useState(() => {
+    //     if (draggable) {
+    //         setStartTop(e?.nativeEvent?.y)
+    //         setStartLeft(e?.nativeEvent?.x)
+    //     } else {
+    //         if (top < -75) {
+    //             setTop(top < -75 ? -windowHeight - ref.current?.clientHeight : 0)
+    //             setDrawnCards((drawnCards) => {
+    //                 return [...drawnCards, card]
+    //             })
+    //         }
+    //         setLeft(0)
+    //         setTransitionDuration('0.3s')
+    //     }
+    // }, [draggable])
 
     return (
         <div
@@ -34,6 +51,31 @@ const Card = ({ card, reveal, drawWidth, windowHeight, setDrawnCards }) => {
                 setTransitionDuration('0s')
             }}
             onTouchEnd={(e) => {
+                if (top < -75) {
+                    setTop(top < -75 ? -windowHeight - ref.current?.clientHeight : 0)
+                    setDrawnCards((drawnCards) => {
+                        return [...drawnCards, card]
+                    })
+                }
+                setLeft(0)
+                setTransitionDuration('0.3s')
+            }}
+            onMouseDown={(e) => {
+                e.stopPropagation()
+                setDraggable(true)
+                setStartTop(e?.nativeEvent?.y)
+                setStartLeft(e?.nativeEvent?.x)
+            }}
+            onMouseMove={(e) => {
+                e.stopPropagation()
+                if (draggable) {
+                    setTop(Math.min(0, -(startTop - e?.nativeEvent?.y)))
+                    setLeft(-(startLeft - e?.nativeEvent?.x))
+                    setTransitionDuration('0s')
+                }
+            }}
+            onMouseUp={(e) => {
+                setDraggable(false)
                 if (top < -75) {
                     setTop(top < -75 ? -windowHeight - ref.current?.clientHeight : 0)
                     setDrawnCards((drawnCards) => {
