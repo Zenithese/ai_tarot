@@ -10,6 +10,8 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
 
     const [leftZ, setLeftZ] = useState(0)
     const [rightZ, setRightZ] = useState(0)
+    const [colCount, setColCount] = useState(78)
+    const [rowCount, setRowCount] = useState(1)
 
     useEffect(() => {
         shuffle()
@@ -32,27 +34,54 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
         setDeck(suffledDeck);
     }
 
+    useEffect(() => {
+        let cc = 78, rc = 1
+        while ((windowSize.width - 256) / cc < 18) {
+            cc /= 2
+            rc += 1
+        }
+        setColCount(cc)
+        setRowCount(rc)
+    }, [windowSize])
+
     if (windowSize.width > 600) {
         return (
             <div
-                className='flex flex-row flex-wrap'
+                className='h-[100vh]'
+                style={{ width: windowSize.width - (256 / 2) }}
             >
-                {
-                    deck.map(card => {
-                        return (
-                            <div key={card.id} className='m-auto'
-                                style={{
-                                    // height: (windowSize.height) / 39,
-                                    width: 20
-                                }}
-                            >
-                                <div ref={cardRef} >
-                                    <DrawCard card={card} reveal drawWidth={windowSize.width / 2} windowHeight={windowSize.height} setDrawnCards={setDrawnCards} />
+                <div
+                    className={`relative top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]`}
+                    style={{ width: windowSize.width - 256 }}
+                >
+                    {
+                        Array(rowCount).fill().map((_, i) => {
+                            return (
+                                <div
+                                    className={`flex flex-row flex-wrap h-[260px] my-auto ${!Number.isInteger(i / 2) ? 'flex-reverse' : ''}`}
+                                >
+                                    {
+                                        deck.slice(i * colCount, (i + 1) * colCount).map((card, idx) => {
+                                            return (
+                                                <div key={card.id}
+                                                    style={{
+                                                        // height: (windowSize.height) / 39,
+                                                        width: (windowSize.width - 256) / colCount,
+                                                        zIndex: !Number.isInteger(i / 2) ? 78 - idx : null
+                                                    }}
+                                                >
+                                                    <div ref={cardRef} >
+                                                        <DrawCard card={card} reveal drawWidth={(windowSize.width) / 2} windowHeight={windowSize.height} setDrawnCards={setDrawnCards} />
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </div>
-                            </div>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
+                </div>
             </div>
         )
     } else {
@@ -75,8 +104,7 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
                                 <div key={card.id} className='m-auto'
                                     style={{
                                         height: (windowSize.height) / 39
-                                    }
-                                    }
+                                    }}
                                 >
                                     <div ref={cardRef} >
                                         <DrawCard card={card} reveal drawWidth={windowSize.width / 2} windowHeight={windowSize.height} setDrawnCards={setDrawnCards} />

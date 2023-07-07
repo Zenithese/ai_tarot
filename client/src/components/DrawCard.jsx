@@ -24,7 +24,7 @@ const Card = ({ card, reveal, drawWidth, windowHeight, setDrawnCards }) => {
     return (
         <div
             className={`draw-card ${flipped ? 'flipped' : ''} relative transition-all`}
-            style={{ width: drawWidth < 600 ? drawWidth : null, top, left, transitionDuration }}
+            style={{ width: drawWidth < 300 ? drawWidth : null, top, left, transitionDuration }}
             onTouchStart={(e) => {
                 setStartTop(e?.nativeEvent?.changedTouches[0]?.clientY)
                 setStartLeft(e?.nativeEvent?.changedTouches[0]?.clientX)
@@ -64,10 +64,10 @@ const Card = ({ card, reveal, drawWidth, windowHeight, setDrawnCards }) => {
             //     setLeft(0)
             //     setTransitionDuration('0.3s')
             // }}
-            // onMouseOver={() => {
-            //     setTop(-18)
-            //     setTransitionDuration('0.3s')
-            // }}
+            onMouseOver={() => {
+                setTop(-18)
+                setTransitionDuration('0.3s')
+            }}
             onMouseLeave={() => {
                 if (!selected) setTop(0)
             }}
