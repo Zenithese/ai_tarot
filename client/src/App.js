@@ -16,6 +16,10 @@ const App = () => {
   const [fetchingMessage, setFetchingMessage] = useState('Blessings to those who wait')
   const [drawing, setDrawing] = useState(false)
 
+  // useEffect(() => {
+  //   console.log(deck.map((c) => c.id))
+  // })
+
   useEffect(() => {
     if (drawnCards.length >= Number(selectedSpread.split('')[0])) {
       setDrawing(false)
