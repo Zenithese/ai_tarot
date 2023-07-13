@@ -47,7 +47,7 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
     if (windowSize.width > 600) {
         return (
             <div
-                className='h-[100vh]'
+                className='h-[100vh] w-full'
                 style={{ width: windowSize.width - (256 / 2) }}
             >
                 <div

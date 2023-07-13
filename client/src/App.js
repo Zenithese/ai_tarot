@@ -159,11 +159,13 @@ const App = () => {
                   {theme}
                 </p>
               </div>
-              <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCards} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw cards</button>
-              <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCard} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw a card</button>
-              <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
-              <h1>Give the cards an intention</h1>
-              <textarea className='m-2 mb-[10px]' onChange={(e) => setQuestion(e.target.value)} />
+              <div className='w-fit m-auto mb-0'>
+                <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCards} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw cards</button>
+                <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCard} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw a card</button>
+                <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
+              </div>
+              <br />
+              <textarea placeholder='You may give the deck an intention.' className='m-auto mt-2 mb-[10px] w-full tablet:w-[342.64px] p-2' onChange={(e) => setQuestion(e.target.value)} />
             </div>
             <div className={`${(tarotReading.length || fetching) ? 'fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[100%]' : ''}`}>
               {drawnCards.length > 0 && (
@@ -191,7 +193,7 @@ const App = () => {
               </div>
             }
           </>
-        }
+      }
     </div>
   );
 
