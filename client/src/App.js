@@ -165,7 +165,9 @@ const App = () => {
                 <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
               </div>
               <br />
-              <textarea placeholder='You may give the deck an intention.' className='m-auto mt-2 mb-[10px] w-full tablet:w-[342.64px] p-2' onChange={(e) => setQuestion(e.target.value)} />
+              <div className='w-[100%] bg-white mt-2 mb-[10px] flex'>
+                <textarea placeholder='You may give the deck an intention.' className='flex m-auto mb-0 w-full [@media(min-width:342.64px)]:w-[342.64px] p-2 resize-none' onChange={(e) => setQuestion(e.target.value)} />
+              </div>
             </div>
             <div className={`${(tarotReading.length || fetching) ? 'fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[100%]' : ''}`}>
               {drawnCards.length > 0 && (
