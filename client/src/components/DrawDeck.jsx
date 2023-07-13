@@ -62,12 +62,13 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
                                 >
                                     {
                                         deck.slice(i * colCount, (i + 1) * colCount).map((card, idx) => {
+                                            {console.log(!Number.isInteger(i / 2) ? ((colCount * (i + 1)) - idx) : (colCount * (i + 1)) + idx)}
                                             return (
                                                 <div key={card.id}
                                                     style={{
                                                         // height: (windowSize.height) / 39,
                                                         width: (windowSize.width - 256) / colCount,
-                                                        zIndex: !Number.isInteger(i / 2) ? 78 - idx : null
+                                                        zIndex: !Number.isInteger(i / 2) ? Math.floor((colCount * (i + 1)) - idx) : Math.floor((colCount * i) + (idx + 1))
                                                     }}
                                                 >
                                                     <div ref={cardRef} >
