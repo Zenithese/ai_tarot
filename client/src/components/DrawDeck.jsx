@@ -58,7 +58,7 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
                         Array(rowCount).fill().map((_, i) => {
                             return (
                                 <div
-                                    className={`flex flex-row flex-wrap h-[260px] my-auto ${!Number.isInteger(i / 2) ? 'flex-reverse' : ''}`}
+                                    className={`flex flex-row h-[260px] my-auto ${!Number.isInteger(i / 2) ? 'flex-reverse' : ''}`}
                                 >
                                     {
                                         deck.slice(i * colCount, (i + 1) * colCount).map((card, idx) => {
