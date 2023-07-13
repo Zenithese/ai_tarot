@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ai_tarot/static/css/main.dfafbc58.css",
-    "main.js": "/ai_tarot/static/js/main.ba5bde51.js",
+    "main.js": "/ai_tarot/static/js/main.d2272f30.js",
     "static/js/787.c4e7f8f9.chunk.js": "/ai_tarot/static/js/787.c4e7f8f9.chunk.js",
     "static/media/king_of_wands.jpg": "/ai_tarot/static/media/king_of_wands.b49c176a95ccbf69742c.jpg",
     "static/media/page_of_wands.jpg": "/ai_tarot/static/media/page_of_wands.a2bf236fe0805376dd11.jpg",
@@ -84,11 +84,11 @@
     "static/media/three_of_swords.jpg": "/ai_tarot/static/media/three_of_swords.40b667d7e30d0a2091aa.jpg",
     "index.html": "/ai_tarot/index.html",
     "main.dfafbc58.css.map": "/ai_tarot/static/css/main.dfafbc58.css.map",
-    "main.ba5bde51.js.map": "/ai_tarot/static/js/main.ba5bde51.js.map",
+    "main.d2272f30.js.map": "/ai_tarot/static/js/main.d2272f30.js.map",
     "787.c4e7f8f9.chunk.js.map": "/ai_tarot/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dfafbc58.css",
-    "static/js/main.ba5bde51.js"
+    "static/js/main.d2272f30.js"
   ]
 }
