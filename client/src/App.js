@@ -166,7 +166,7 @@ const App = () => {
               </div>
               <br />
               <div className='w-[100%] bg-white mt-2 mb-[10px] flex'>
-                <textarea placeholder='You may give the deck an intention.' className='flex m-auto mb-0 w-full [@media(min-width:342.64px)]:w-[342.64px] p-2 resize-none' onChange={(e) => setQuestion(e.target.value)} />
+                <textarea placeholder='You may give the deck an intention.' className='flex m-auto mb-0 w-full [@media(min-width:342.64px)]:w-[342.64px] p-2 resize-none focus:outline-none' onChange={(e) => setQuestion(e.target.value)} />
               </div>
             </div>
             <div className={`${(tarotReading.length || fetching) ? 'fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[100%]' : ''}`}>
