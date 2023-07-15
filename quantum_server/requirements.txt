@@ -54,7 +54,7 @@ pbr
 ply
 psutil
 pycodestyle 
-pycparser 1
+pycparser
 python-dateutil
 pytz 
 qiskit 
