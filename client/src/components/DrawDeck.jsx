@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import DrawCard from './DrawCard'
 import useWindowSize from '../hooks/useWindowResize'
+import { tarotDeck } from '../tarotDeck';
 
 export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
 
@@ -17,9 +18,9 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
         shuffle()
     }, [])
 
-    const shuffle = () => {
+    const shuffle = async () => {
         const newDeck = [...deck];
-        const suffledDeck = []
+        const shuffledDeck = []
         while (newDeck.length) {
             const randomIndex = Math.floor(Math.random() * newDeck.length);
             const card = newDeck[randomIndex];
@@ -29,9 +30,45 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
                 reversed: reversed
             };
             newDeck.splice(randomIndex, 1); // Remove the drawn card from the deck
-            suffledDeck.push(newCard);
+            shuffledDeck.push(newCard);
         }
-        setDeck(suffledDeck);
+
+        // const response = await fetch(
+        //     "http://127.0.0.1:8000/deck/shuffle",
+        //     // "https://ai-tarot.onrender.com",
+        //     {
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //     });
+
+        // if (!response.ok) {
+        //     console.log('error: ', response)
+        //     // const data = await response.json()
+        //     // const error = (data && data.message) || response.status;
+        //     // console.log(error)
+        //     // alert('Something went wrong. Please try again later.')
+        //     // return Promise.reject(error)
+        //     const newDeck = [...deck];
+        //     const shuffledDeck = []
+        //     while (newDeck.length) {
+        //         const randomIndex = Math.floor(Math.random() * newDeck.length);
+        //         const card = newDeck[randomIndex];
+        //         const reversed = Math.random() < 0.5; // Determine whether the card is reversed
+        //         const newCard = {
+        //             ...card,
+        //             reversed: reversed
+        //         };
+        //         newDeck.splice(randomIndex, 1); // Remove the drawn card from the deck
+        //         shuffledDeck.push(newCard);
+        //     }
+        // }
+
+        // const jsonData = await response.json()
+        // const shuffledDeck = jsonData.deck.map(num => tarotDeck[num]) 
+
+        setDeck(shuffledDeck);
     }
 
     useEffect(() => {
@@ -62,7 +99,6 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
                                 >
                                     {
                                         deck.slice(i * colCount, (i + 1) * colCount).map((card, idx) => {
-                                            {console.log(!Number.isInteger(i / 2) ? ((colCount * (i + 1)) - idx) : (colCount * (i + 1)) + idx)}
                                             return (
                                                 <div key={card.id}
                                                     style={{
