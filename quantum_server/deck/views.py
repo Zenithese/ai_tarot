@@ -51,11 +51,12 @@ class Shuffle(APIView):
 
             while len(tarotDeck) > 1:
                 random_num = quantum_rng(len(tarotDeck))
+                reversed = quantum_rng(2) == 2
                 card = tarotDeck[random_num - 1]
                 tarotDeck.pop(random_num - 1)
-                shuffledDeck.append(card)
+                shuffledDeck.append([card, reversed])
 
-            shuffledDeck.append(tarotDeck[0])
+            shuffledDeck.append([tarotDeck[0], quantum_rng(2) == 2])
 
             print(shuffledDeck)
 
