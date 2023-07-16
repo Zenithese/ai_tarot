@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mysite"
+name = "quantum_server"
 version = "0.1.0"
 description = ""
 authors = ["Justin <jandersen770@gmail.com>"]
@@ -28,8 +28,6 @@ pycodestyle = "2.10.0"
 pycparser = "2.21"
 python-dateutil = "2.8.2"
 pytz = "2023.3"
-qiskit = "0.43.2"
-qiskit-aer = "0.12.1"
 qiskit-ibmq-provider = "0.20.2"
 qiskit-terra = "0.24.1"
 requests = "2.31.0"
@@ -45,6 +43,8 @@ urllib3 = "2.0.3"
 websocket-client = "1.6.1"
 websockets = "11.0.3"
 gunicorn = "^20.1.0"
+qiskit = "0.43.1"
+whitenoise = {extras = ["brotli"], version = "^6.5.0"}
 
 
 [build-system]
