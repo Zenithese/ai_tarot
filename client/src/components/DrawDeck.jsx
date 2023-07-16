@@ -19,56 +19,36 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
     }, [])
 
     const shuffle = async () => {
-        const newDeck = [...deck];
-        const shuffledDeck = []
-        while (newDeck.length) {
-            const randomIndex = Math.floor(Math.random() * newDeck.length);
-            const card = newDeck[randomIndex];
-            const reversed = Math.random() < 0.5; // Determine whether the card is reversed
-            const newCard = {
-                ...card,
-                reversed: reversed
-            };
-            newDeck.splice(randomIndex, 1); // Remove the drawn card from the deck
-            shuffledDeck.push(newCard);
+        try {
+            const response = await fetch(
+                // "http://127.0.0.1:8000/deck/shuffle",
+                "https://quantum-server-m3ow.onrender.com/deck/shuffle",
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+            const jsonData = await response.json()
+            const shuffledDeck = jsonData.deck.map(([num, reversed]) => { return { ...tarotDeck[num], reversed } })
+            setDeck(shuffledDeck);
+        } catch (error) {
+            console.log('error: ', error)
+            const newDeck = [...deck];
+            const shuffledDeck = []
+            while (newDeck.length) {
+                const randomIndex = Math.floor(Math.random() * newDeck.length);
+                const card = newDeck[randomIndex];
+                const reversed = Math.random() < 0.5; // Determine whether the card is reversed
+                const newCard = {
+                    ...card,
+                    reversed: reversed
+                };
+                newDeck.splice(randomIndex, 1); // Remove the drawn card from the deck
+                shuffledDeck.push(newCard);
+            }
+            setDeck(shuffledDeck);
         }
-
-        // const response = await fetch(
-        //     "http://127.0.0.1:8000/deck/shuffle",
-        //     // "https://ai-tarot.onrender.com",
-        //     {
-        //         method: "GET",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //     });
-
-        // if (!response.ok) {
-        //     console.log('error: ', response)
-        //     // const data = await response.json()
-        //     // const error = (data && data.message) || response.status;
-        //     // console.log(error)
-        //     // alert('Something went wrong. Please try again later.')
-        //     // return Promise.reject(error)
-        //     const newDeck = [...deck];
-        //     const shuffledDeck = []
-        //     while (newDeck.length) {
-        //         const randomIndex = Math.floor(Math.random() * newDeck.length);
-        //         const card = newDeck[randomIndex];
-        //         const reversed = Math.random() < 0.5; // Determine whether the card is reversed
-        //         const newCard = {
-        //             ...card,
-        //             reversed: reversed
-        //         };
-        //         newDeck.splice(randomIndex, 1); // Remove the drawn card from the deck
-        //         shuffledDeck.push(newCard);
-        //     }
-        // }
-
-        // const jsonData = await response.json()
-        // const shuffledDeck = jsonData.deck.map(num => tarotDeck[num]) 
-
-        setDeck(shuffledDeck);
     }
 
     useEffect(() => {
