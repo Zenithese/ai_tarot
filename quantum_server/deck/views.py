@@ -63,3 +63,8 @@ class Shuffle(APIView):
             return shuffledDeck
 
         return JsonResponse({ 'deck': shuffle() })
+
+class StartServer(APIView):
+
+    def get(self, request, *args, **kwargs):
+        return JsonResponse({ 'Server running': True  })

@@ -24,6 +24,31 @@ const App = () => {
   const [drawing, setDrawing] = useState(false)
 
   useEffect(() => {
+    (async () => {
+      await fetch(
+        // "http://127.0.0.1:8000/deck/startserver",
+        "https://quantum-server-m3ow.onrender.com/deck/startserver",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+      // await fetch(
+      //   "http://localhost:3001",
+      //   // "https://ai-tarot.onrender.com",
+      //   {
+      //     method: "GET",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   });
+    })()
+    console.log('effect used')
+  }, [])
+
+  useEffect(() => {
     if (drawnCards.length >= Number(selectedSpread.split('')[0])) {
       setDrawing(false)
     }
@@ -109,42 +134,42 @@ const App = () => {
   const shuffle = async () => {
     setQuantumFetching(true)
     try {
-        const response = await fetch(
-            // "http://127.0.0.1:8000/deck/shuffle",
-            "https://quantum-server-m3ow.onrender.com/deck/shuffle",
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-        const jsonData = await response.json()
-        const shuffledDeck = jsonData.deck.map(([num, reversed]) => { return { ...tarotDeck[num], reversed } })
-        setDeck(shuffledDeck);
-        setQuantumFetching(false);
+      const response = await fetch(
+        // "http://127.0.0.1:8000/deck/shuffle",
+        "https://quantum-server-m3ow.onrender.com/deck/shuffle",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      const jsonData = await response.json()
+      const shuffledDeck = jsonData.deck.map(([num, reversed]) => { return { ...tarotDeck[num], reversed } })
+      setDeck(shuffledDeck);
+      setQuantumFetching(false);
     } catch (error) {
-        console.log('error: ', error)
-        setQuantumFetching(false);
-        setQuantumFetchingError(true);
-        const newDeck = [...deck];
-        const shuffledDeck = []
-        while (newDeck.length) {
-            const randomIndex = Math.floor(Math.random() * newDeck.length);
-            const card = newDeck[randomIndex];
-            const reversed = Math.random() < 0.5; // Determine whether the card is reversed
-            const newCard = {
-                ...card,
-                reversed: reversed
-            };
-            newDeck.splice(randomIndex, 1); // Remove the drawn card from the deck
-            shuffledDeck.push(newCard);
-        }
-        setDeck(shuffledDeck);
-        setTimeout(() => {
-            setQuantumFetchingError(false)
-        }, 1000)
+      console.log('error: ', error)
+      setQuantumFetching(false);
+      setQuantumFetchingError(true);
+      const newDeck = [...deck];
+      const shuffledDeck = []
+      while (newDeck.length) {
+        const randomIndex = Math.floor(Math.random() * newDeck.length);
+        const card = newDeck[randomIndex];
+        const reversed = Math.random() < 0.5; // Determine whether the card is reversed
+        const newCard = {
+          ...card,
+          reversed: reversed
+        };
+        newDeck.splice(randomIndex, 1); // Remove the drawn card from the deck
+        shuffledDeck.push(newCard);
+      }
+      setDeck(shuffledDeck);
+      setTimeout(() => {
+        setQuantumFetchingError(false)
+      }, 1000)
     }
-}
+  }
 
   const reading = () => {
     // Create an array of card meanings based on the cards drawn, including whether they are reversed or upright
