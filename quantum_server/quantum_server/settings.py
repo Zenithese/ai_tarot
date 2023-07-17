@@ -139,7 +139,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://jbauce.com"
+    "http://jbauce.com",
+    "https://jbauce.com",
 ]
 
 CORS_ALLOW_METHODS = [
