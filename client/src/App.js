@@ -27,7 +27,7 @@ const App = () => {
     if (drawnCards.length >= Number(selectedSpread.split('')[0])) {
       setDrawing(false)
     }
-  }, [drawnCards])
+  }, [drawnCards, selectedSpread])
 
   useEffect(() => {
     const overflow = Number(selectedSpread.split('')[0]) - drawnCards.length

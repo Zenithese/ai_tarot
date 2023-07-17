@@ -16,6 +16,7 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards, setQuantumFetching, set
 
     useEffect(() => {
         shuffle()
+        // eslint-disable-next-line
     }, [])
 
     const shuffle = async () => {
