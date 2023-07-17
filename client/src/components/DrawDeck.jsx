@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import DrawCard from './DrawCard'
 import useWindowSize from '../hooks/useWindowResize'
-import { tarotDeck } from '../tarotDeck';
 
-export const DrawDeck = ({ deck, setDeck, setDrawnCards, setQuantumFetching, setQuantumFetchingError }) => {
+export const DrawDeck = ({ deck, setDrawnCards }) => {
 
     const windowSize = useWindowSize();
 
@@ -13,51 +12,6 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards, setQuantumFetching, set
     const [rightZ, setRightZ] = useState(0)
     const [colCount, setColCount] = useState(78)
     const [rowCount, setRowCount] = useState(1)
-
-    useEffect(() => {
-        shuffle()
-        // eslint-disable-next-line
-    }, [])
-
-    const shuffle = async () => {
-        setQuantumFetching(true)
-        try {
-            const response = await fetch(
-                // "http://127.0.0.1:8000/deck/shuffle",
-                "https://quantum-server-m3ow.onrender.com/deck/shuffle",
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
-            const jsonData = await response.json()
-            const shuffledDeck = jsonData.deck.map(([num, reversed]) => { return { ...tarotDeck[num], reversed } })
-            setDeck(shuffledDeck);
-            setQuantumFetching(false);
-        } catch (error) {
-            console.log('error: ', error)
-            setQuantumFetching(false);
-            setQuantumFetchingError(true);
-            const newDeck = [...deck];
-            const shuffledDeck = []
-            while (newDeck.length) {
-                const randomIndex = Math.floor(Math.random() * newDeck.length);
-                const card = newDeck[randomIndex];
-                const reversed = Math.random() < 0.5; // Determine whether the card is reversed
-                const newCard = {
-                    ...card,
-                    reversed: reversed
-                };
-                newDeck.splice(randomIndex, 1); // Remove the drawn card from the deck
-                shuffledDeck.push(newCard);
-            }
-            setDeck(shuffledDeck);
-            setTimeout(() => {
-                setQuantumFetchingError(false)
-            }, 1000)
-        }
-    }
 
     useEffect(() => {
         let cc = 78, rc = 1
@@ -117,7 +71,7 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards, setQuantumFetching, set
             >
                 <div
                     className='grid grid-cols-1'
-                    style={{ width: windowSize.width / 2 }}
+                    style={{ width: (windowSize.width || 1) / 2 }}
                     onTouchStart={() => {
                         setLeftZ(100)
                         setRightZ(0)
@@ -128,7 +82,7 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards, setQuantumFetching, set
                             return (
                                 <div key={card.id} className='m-auto'
                                     style={{
-                                        height: (windowSize.height) / 39
+                                        height: (windowSize.height || 1) / 39
                                     }}
                                 >
                                     <div ref={cardRef} >
@@ -141,7 +95,7 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards, setQuantumFetching, set
                 </div>
                 <div
                     className='grid grid-cols-1'
-                    style={{ width: cardRef.current?.clientWidth / 2, zIndex: rightZ }}
+                    style={{ width: (cardRef.current?.clientWidth || 1) / 2, zIndex: rightZ }}
                     onTouchStart={() => {
                         setLeftZ(0)
                         setRightZ(100)
@@ -152,7 +106,7 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards, setQuantumFetching, set
                             return (
                                 <div key={card.id} className='m-auto'
                                     style={{
-                                        height: (windowSize.height) / 39
+                                        height: (windowSize.height || 1) / 39
                                     }
                                     }
                                 >

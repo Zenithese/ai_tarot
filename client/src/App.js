@@ -103,7 +103,48 @@ const App = () => {
 
   const drawCards = () => {
     setDrawing(true)
+    shuffle()
   }
+
+  const shuffle = async () => {
+    setQuantumFetching(true)
+    try {
+        const response = await fetch(
+            // "http://127.0.0.1:8000/deck/shuffle",
+            "https://quantum-server-m3ow.onrender.com/deck/shuffle",
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+        const jsonData = await response.json()
+        const shuffledDeck = jsonData.deck.map(([num, reversed]) => { return { ...tarotDeck[num], reversed } })
+        setDeck(shuffledDeck);
+        setQuantumFetching(false);
+    } catch (error) {
+        console.log('error: ', error)
+        setQuantumFetching(false);
+        setQuantumFetchingError(true);
+        const newDeck = [...deck];
+        const shuffledDeck = []
+        while (newDeck.length) {
+            const randomIndex = Math.floor(Math.random() * newDeck.length);
+            const card = newDeck[randomIndex];
+            const reversed = Math.random() < 0.5; // Determine whether the card is reversed
+            const newCard = {
+                ...card,
+                reversed: reversed
+            };
+            newDeck.splice(randomIndex, 1); // Remove the drawn card from the deck
+            shuffledDeck.push(newCard);
+        }
+        setDeck(shuffledDeck);
+        setTimeout(() => {
+            setQuantumFetchingError(false)
+        }, 1000)
+    }
+}
 
   const reading = () => {
     // Create an array of card meanings based on the cards drawn, including whether they are reversed or upright
@@ -262,11 +303,11 @@ const App = () => {
                     </div>
                   ) : (
                     <div className='absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
-                      <div className='w-[221px] text-left'>
+                      <div className='w-[231px] text-left'>
                         {quantumFetchingErrorMessage.split(' ').slice(0, 3).join(' ')}
                       </div>
 
-                      <div className='w-[169px] mt-2 text-left relative left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
+                      <div className='w-[201px] mt-2 text-left relative left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
                         {quantumFetchingErrorMessage.split(' ').slice(3).join(' ')}
                       </div>
                     </div>
