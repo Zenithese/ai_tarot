@@ -4,7 +4,7 @@ import Card from './Card';
 export default function FiveCards({ drawnCards }) {
     return (
         <div>
-            <div className='grid grid-cols-9 mb-[50px] max-w-[800px] m-auto h-[169.33px] sm:h-[255.34px]'>
+            <div className='grid grid-cols-9 mb-[50px] max-w-[800px] m-auto h-[169.33px] tablet:h-[255.34px]'>
                 {
                     drawnCards[3] && (
                         <div key={drawnCards[3].id} className='col-start-4 col-span-3'>

@@ -1093,6 +1093,10 @@ video {
 }
 
 @media (min-width: 640px) {
+  .tablet\:h-\[255\.34px\] {
+    height: 255.34px;
+  }
+
   .tablet\:w-\[420px\] {
     width: 420px;
   }
@@ -1103,6 +1107,12 @@ video {
 
   .tablet\:w-\[300px\] {
     width: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .laptop\:h-\[255\.34px\] {
+    height: 255.34px;
   }
 }
 
