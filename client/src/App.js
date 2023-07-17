@@ -3,8 +3,11 @@ import './App.css';
 import { tarotDeck, tarotNames } from './tarotDeck';
 import Spread from './components/Spread';
 import { DrawDeck } from './components/DrawDeck';
+import useWindowSize from './hooks/useWindowResize'
 
 const App = () => {
+
+  const windowSize = useWindowSize();
 
   const [drawnCards, setDrawnCards] = useState([]);
   const [deck, setDeck] = useState(tarotDeck);
@@ -14,6 +17,10 @@ const App = () => {
   const [selectedSpread, setSelectedSpread] = useState('1 card')
   const [fetching, setFetching] = useState(false)
   const [fetchingMessage, setFetchingMessage] = useState('Blessings to those who wait')
+  const [quantumFetching, setQuantumFetching] = useState(false)
+  const [quantumFetchingMessage, setQuantumFetchingMessage] = useState('Connecting to quantum server for a quantum shuffle')
+  const [quantumFetchingError, setQuantumFetchingError] = useState(false)
+  const [quantumFetchingErrorMessage, setQuantumFetchingErrorMessage] = useState('Quantum computer unavailable. Using psudorandom shuffle')
   const [drawing, setDrawing] = useState(false)
 
   useEffect(() => {
@@ -52,6 +59,28 @@ const App = () => {
       }
     }, 1000)
   }, [fetching, fetchingMessage])
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (quantumFetching) {
+        if (!quantumFetchingMessage.includes('.')) setQuantumFetchingMessage('Connecting to quantum server for a quantum shuffle.')
+        else if (quantumFetchingMessage.includes('.') && !quantumFetchingMessage.includes('..')) setQuantumFetchingMessage('Connecting to quantum server for a quantum shuffle..')
+        else if (quantumFetchingMessage.includes('..') && !quantumFetchingMessage.includes('...')) setQuantumFetchingMessage('Connecting to quantum server for a quantum shuffle...')
+        else setQuantumFetchingMessage('Connecting to quantum server for a quantum shuffle')
+      }
+    }, 1000)
+  }, [quantumFetching, quantumFetchingMessage])
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (quantumFetchingError) {
+        if (!quantumFetchingErrorMessage.includes('.')) setQuantumFetchingErrorMessage('Quantum computer unavailable. Using psudorandom shuffle.')
+        else if (quantumFetchingErrorMessage.includes('.') && !quantumFetchingErrorMessage.includes('..')) setQuantumFetchingErrorMessage('Quantum computer unavailable. Using psudorandom shuffle..')
+        else if (quantumFetchingErrorMessage.includes('..') && !quantumFetchingErrorMessage.includes('...')) setQuantumFetchingErrorMessage('Quantum computer unavailable. Using psudorandom shuffle...')
+        else setQuantumFetchingErrorMessage('Quantum computer unavailable. Using psudorandom shuffle')
+      }
+    }, 1000)
+  }, [quantumFetchingError, quantumFetchingErrorMessage])
 
   const drawCard = () => {
     const randomIndex = Math.floor(Math.random() * deck.length);
@@ -141,7 +170,14 @@ const App = () => {
   return (
     <div className={`App ${tarotReading.length ? 'overflow-hidden h-[100vh]' : ''}`}>
       {
-        drawing ? <DrawDeck deck={deck} setDeck={setDeck} setDrawnCards={setDrawnCards} /> :
+        drawing && !quantumFetching && !quantumFetchingError ? <DrawDeck
+          deck={deck}
+          setDeck={setDeck}
+          setDrawnCards={setDrawnCards}
+          setQuantumFetching={setQuantumFetching}
+          setQuantumFetchingError={setQuantumFetchingError}
+          setQuantumFetchingErrorMessage={setQuantumFetchingErrorMessage}
+        /> :
           <>
             <div className={`App ${tarotReading.length || fetching ? 'overflow-hidden h-0' : ''}`}>
               <h1 className='text-[20px] mb-[15px] mt-5'>Tarot Card Reader</h1>
@@ -192,6 +228,50 @@ const App = () => {
                 <div className='w-[220px] text-left absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
                   {fetchingMessage}
                 </div>
+              </div>
+            }
+            {
+              quantumFetching &&
+              <div className='bg-black opacity-75 absolute w-[95%] m-auto h-[100%] overflow-scroll text-white top-0 left-0 right-0 bottom-0 flex flex-col'>
+                {
+                  windowSize.width > 640 ? (
+                    <div className='tablet:w-[420px] text-left absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
+                      {quantumFetchingMessage}
+                    </div>
+                  ) : (
+                    <div className='absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
+                      <div className='w-[221px] text-left'>
+                        {quantumFetchingMessage.split(' ').slice(0, 4).join(' ')}
+                      </div>
+
+                      <div className='w-[169px] mt-2 text-left relative left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
+                        {quantumFetchingMessage.split(' ').slice(4).join(' ')}
+                      </div>
+                    </div>
+                  )
+                }
+              </div>
+            }
+            {
+              quantumFetchingError &&
+              <div className='bg-black opacity-75 absolute w-[95%] m-auto h-[100%] overflow-scroll text-white top-0 left-0 right-0 bottom-0 flex flex-col'>
+                {
+                  windowSize.width > 640 ? (
+                    <div className='tablet:w-[420px] text-left absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
+                      {quantumFetchingErrorMessage}
+                    </div>
+                  ) : (
+                    <div className='absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
+                      <div className='w-[221px] text-left'>
+                        {quantumFetchingErrorMessage.split(' ').slice(0, 3).join(' ')}
+                      </div>
+
+                      <div className='w-[169px] mt-2 text-left relative left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]'>
+                        {quantumFetchingErrorMessage.split(' ').slice(3).join(' ')}
+                      </div>
+                    </div>
+                  )
+                }
               </div>
             }
           </>

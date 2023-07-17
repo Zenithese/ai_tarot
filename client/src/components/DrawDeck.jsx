@@ -3,7 +3,7 @@ import DrawCard from './DrawCard'
 import useWindowSize from '../hooks/useWindowResize'
 import { tarotDeck } from '../tarotDeck';
 
-export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
+export const DrawDeck = ({ deck, setDeck, setDrawnCards, setQuantumFetching, setQuantumFetchingError }) => {
 
     const windowSize = useWindowSize();
 
@@ -19,6 +19,7 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
     }, [])
 
     const shuffle = async () => {
+        setQuantumFetching(true)
         try {
             const response = await fetch(
                 // "http://127.0.0.1:8000/deck/shuffle",
@@ -32,8 +33,11 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
             const jsonData = await response.json()
             const shuffledDeck = jsonData.deck.map(([num, reversed]) => { return { ...tarotDeck[num], reversed } })
             setDeck(shuffledDeck);
+            setQuantumFetching(false);
         } catch (error) {
             console.log('error: ', error)
+            setQuantumFetching(false);
+            setQuantumFetchingError(true);
             const newDeck = [...deck];
             const shuffledDeck = []
             while (newDeck.length) {
@@ -48,6 +52,9 @@ export const DrawDeck = ({ deck, setDeck, setDrawnCards }) => {
                 shuffledDeck.push(newCard);
             }
             setDeck(shuffledDeck);
+            setTimeout(() => {
+                setQuantumFetchingError(false)
+            }, 1000)
         }
     }
 
