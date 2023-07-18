@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -68,3 +69,51 @@ class StartServer(APIView):
 
     def get(self, request, *args, **kwargs):
         return JsonResponse({ 'Server running': True  })
+
+class DrawRandomCard(APIView):
+
+    def post(self, request, *args, **kwargs):
+            
+        def quantum_rng(num):
+            # Determine the number of qubits required based on the given maximum value
+            num_qubits = int(np.ceil(np.log2(num)))
+
+            # Create a quantum circuit with the required number of qubits
+            circuit = QuantumCircuit(num_qubits, num_qubits)
+
+            # Apply Hadamard gates to initialize qubits in superposition
+            circuit.h(range(num_qubits))
+
+            # Measure all qubits
+            circuit.measure(range(num_qubits), range(num_qubits))
+
+            # Choose a quantum simulator backend
+            backend = Aer.get_backend('qasm_simulator')
+
+            # Execute the circuit on the chosen backend
+            job = execute(circuit, backend, shots=1)
+
+            # Get the measurement results
+            result = job.result()
+            counts = result.get_counts()
+
+            # Extract the binary outcome from the measurement result
+            measurement = list(counts.keys())[0]
+            decimal_value = int(measurement, 2)
+
+            # Map the decimal value to the range [1, num]
+            random_number = (decimal_value % num) + 1
+
+            return random_number
+
+
+        def drawRandomIndex(request):
+            body_unicode = request.body.decode('utf-8')
+            body = json.loads(body_unicode)
+            random_num = quantum_rng(body['length'])
+            reversed = quantum_rng(2) == 2
+            res = [random_num, reversed]
+            return res
+
+        return JsonResponse({ 'card': drawRandomIndex(request) })
+ 

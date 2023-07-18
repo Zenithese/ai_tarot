@@ -22,6 +22,7 @@ const App = () => {
   const [quantumFetchingError, setQuantumFetchingError] = useState(false)
   const [quantumFetchingErrorMessage, setQuantumFetchingErrorMessage] = useState('Quantum computer unavailable. Using psudorandom shuffle')
   const [drawing, setDrawing] = useState(false)
+  // const [isQuantum, setIsQuantum] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -36,8 +37,8 @@ const App = () => {
         });
 
       await fetch(
-        // "http://localhost:3001",
-        "https://ai-tarot.onrender.com",
+        "http://localhost:3001",
+        // "https://ai-tarot.onrender.com",
         {
           method: "GET",
           headers: {
@@ -120,9 +121,38 @@ const App = () => {
     setDeck(newDeck);
   };
 
+  const quantumDrawCard = async () => {
+    const response = await fetch(
+      // "http://127.0.0.1:8000/deck/drawrandomcard",
+      "https://quantum-server-m3ow.onrender.com/deck/drawrandomcard",
+      {
+        method: "POST",
+        headers:{
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },    
+        body: JSON.stringify({
+          length: deck.length
+        })
+      }
+    );
+
+    const jsonData = await response.json() // [position of card in deck: Number, boolean of reversed card: Number]
+    const [quantumRandomIndex, reversed] = jsonData.card
+    const card = deck[quantumRandomIndex];
+    const newCard = {
+      ...card,
+      reversed: reversed
+    };
+    const newDeck = [...deck];
+    newDeck.splice(quantumRandomIndex, 1); // Remove the drawn card from the deck
+    setDrawnCards([...drawnCards, newCard]);
+    setDeck(newDeck);
+  }
+
   const clearDrawnCards = () => {
     setDrawnCards([]);
     setDeck(tarotDeck);
+    // shuffle();
   };
 
   const drawCards = () => {
@@ -246,6 +276,7 @@ const App = () => {
           <>
             <div className={`App ${tarotReading.length || fetching ? 'overflow-hidden h-0' : ''}`}>
               <h1 className='text-[20px] mb-[15px] mt-5'>Tarot Card Reader</h1>
+
               <div className='text-[18px] mb-[15px]'>
                 <select value={selectedSpread} onChange={(e) => setSelectedSpread(e.target.value)}>
                   <option value={'1 card'}>1 card</option>
@@ -255,6 +286,13 @@ const App = () => {
                   <option value={'5 cards'}>5 cards</option>
                 </select>
               </div>
+
+              {/* <label className="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" value="" className="sr-only peer" />
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                  <span className="ml-3 text-sm font-medium">Use qunatum rng</span>
+              </label> */}
+
               <div>
                 <p className='text-[20px] underline mb-[5px]'>
                   {theme}
@@ -262,7 +300,7 @@ const App = () => {
               </div>
               <div className='w-fit m-auto mb-0'>
                 <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCards} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw cards</button>
-                <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={drawCard} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw a card</button>
+                <button className='border-2 border-black p-2 m-2 disabled:opacity-50' onClick={quantumDrawCard} disabled={drawnCards.length >= Number(selectedSpread.split('')[0])}>Draw a card</button>
                 <button className='border-2 border-black p-2 m-2' onClick={clearDrawnCards}>Clear cards</button>
               </div>
               <br />
