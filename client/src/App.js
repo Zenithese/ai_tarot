@@ -35,15 +35,15 @@ const App = () => {
           },
         });
 
-      // await fetch(
-      //   "http://localhost:3001",
-      //   // "https://ai-tarot.onrender.com",
-      //   {
-      //     method: "GET",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   });
+      await fetch(
+        // "http://localhost:3001",
+        "https://ai-tarot.onrender.com",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
     })()
   }, [])
 
