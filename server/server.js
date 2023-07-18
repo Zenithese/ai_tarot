@@ -25,7 +25,7 @@ app.post('/', async (req, res) => {
   try {
     let { arrangement, theme, question } = req.body;
 
-    if (theme === 'The cross formation') theme += ' (the card order is as follows, 1 on the left representing the past, 2 in the center representing the present, 3 on the right representing future, 4 up top representing the core reason for circumstances and 5 below representing the potential of situation. The reading should go left to center to right to top to bottom.)';
+    if (theme === 'The cross formation') theme += ' (. The card order is as follows, 1 on the left representing the past, 2 in the center representing the present, 3 on the right representing future, 4 up top representing the core reason for circumstances and 5 below representing the potential of situation. The reading should go left to center to right to top to bottom.)';
 
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
