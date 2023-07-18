@@ -37,8 +37,8 @@ const App = () => {
         });
 
       await fetch(
-        "http://localhost:3001",
-        // "https://ai-tarot.onrender.com",
+        // "http://localhost:3001",
+        "https://ai-tarot.onrender.com",
         {
           method: "GET",
           headers: {
