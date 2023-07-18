@@ -31,7 +31,7 @@ app.post('/', async (req, res) => {
       model: "gpt-3.5-turbo",
       messages: [
         { "role": "system", "content": `Give a tarot reading.` },
-        { "role": "user", "content": `Using this array of tarot cards ${arrangement} and the following theme: ${theme}, interpret them considering this intention: ${question.length ? question : 'give me a general reading'}. When useful and dramatic to use the imagery of the cards from The Rider Tarot Deck into your reading. Do not mention "The Rider Tarot Deck" at all in your response. Finally lean into a wiccan terminology.` }
+        { "role": "user", "content": `Using this array of tarot cards ${arrangement} and the following theme: ${theme}, interpret them considering this intention: ${question.length ? question : 'give me a general reading'}. When useful and dramatic to use the imagery of the cards from The Rider Tarot Deck into your reading. Do not mention "The Rider Tarot Deck" at all in your response. Finally lean into wiccan terminology, but do not use the word "wiccan".` }
       ]
     });
 
